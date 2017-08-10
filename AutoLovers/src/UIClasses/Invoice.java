@@ -79,21 +79,21 @@ public class Invoice extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jldate = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jlinvno = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jltime = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jlcashier = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel25 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
+        jlbranch = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -124,21 +124,21 @@ public class Invoice extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        tfcuscontact = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        tfcusname = new javax.swing.JTextField();
         jPanel19 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        tfaddress = new javax.swing.JTextField();
         jPanel20 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        tfvehicle = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        tftechno = new javax.swing.JTextField();
         jPanel23 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         tftechnician = new javax.swing.JTextField();
@@ -150,7 +150,7 @@ public class Invoice extends javax.swing.JFrame {
         jPanel26 = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
-        tfinvprice = new javax.swing.JLabel();
+        jlinvprice = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
@@ -279,8 +279,8 @@ public class Invoice extends javax.swing.JFrame {
         jLabel4.setText("Date");
         jLabel4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(220, 220, 220)));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel5.setText("2017-07-05");
+        jldate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jldate.setText("2017-07-05");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -290,13 +290,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jldate, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addComponent(jldate, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 220, 220)));
@@ -305,8 +305,8 @@ public class Invoice extends javax.swing.JFrame {
         jLabel6.setText("Invoice");
         jLabel6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(220, 220, 220)));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel7.setText("MB0001");
+        jlinvno.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jlinvno.setText("MB0001");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -316,14 +316,14 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(jlinvno, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlinvno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 220, 220)));
@@ -332,8 +332,8 @@ public class Invoice extends javax.swing.JFrame {
         jLabel8.setText("Time");
         jLabel8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(220, 220, 220)));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel9.setText("12:52:10 PM");
+        jltime.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jltime.setText("12:52:10 PM");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -343,14 +343,14 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jltime, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jltime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 220, 220)));
@@ -359,8 +359,8 @@ public class Invoice extends javax.swing.JFrame {
         jLabel10.setText("Cashier");
         jLabel10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(220, 220, 220)));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel11.setText("Rashitha");
+        jlcashier.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jlcashier.setText("Rashitha");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -370,14 +370,14 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(jlcashier, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlcashier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 220, 220)));
@@ -406,8 +406,8 @@ public class Invoice extends javax.swing.JFrame {
         jLabel28.setText("Branch");
         jLabel28.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(220, 220, 220)));
 
-        jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel29.setText("Wattala");
+        jlbranch.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jlbranch.setText("Wattala");
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
@@ -417,14 +417,14 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(jlbranch, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlbranch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -817,9 +817,9 @@ public class Invoice extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel22.setText("Contact No.");
 
-        jTextField7.setBackground(new java.awt.Color(253, 253, 253));
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tfcuscontact.setBackground(new java.awt.Color(253, 253, 253));
+        tfcuscontact.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfcuscontact.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -829,13 +829,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                .addComponent(tfcuscontact, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfcuscontact, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel16.setBackground(new java.awt.Color(250, 250, 250));
@@ -844,9 +844,9 @@ public class Invoice extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel21.setText("Customer Name");
 
-        jTextField6.setBackground(new java.awt.Color(253, 253, 253));
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tfcusname.setBackground(new java.awt.Color(253, 253, 253));
+        tfcusname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfcusname.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -856,13 +856,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField6))
+                .addComponent(tfcusname))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfcusname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel19.setBackground(new java.awt.Color(250, 250, 250));
@@ -871,9 +871,9 @@ public class Invoice extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel23.setText("Address");
 
-        jTextField8.setBackground(new java.awt.Color(253, 253, 253));
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tfaddress.setBackground(new java.awt.Color(253, 253, 253));
+        tfaddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfaddress.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -883,13 +883,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField8))
+                .addComponent(tfaddress))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel20.setBackground(new java.awt.Color(250, 250, 250));
@@ -898,9 +898,9 @@ public class Invoice extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel24.setText("Vehicle No.");
 
-        jTextField9.setBackground(new java.awt.Color(253, 253, 253));
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tfvehicle.setBackground(new java.awt.Color(253, 253, 253));
+        tfvehicle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfvehicle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -910,13 +910,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                .addComponent(tfvehicle, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfvehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -963,12 +963,12 @@ public class Invoice extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel26.setText("Tec. No.");
 
-        jTextField10.setBackground(new java.awt.Color(253, 253, 253));
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        tftechno.setBackground(new java.awt.Color(253, 253, 253));
+        tftechno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tftechno.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tftechno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                tftechnoActionPerformed(evt);
             }
         });
 
@@ -980,13 +980,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tftechno, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tftechno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel23.setBackground(new java.awt.Color(250, 250, 250));
@@ -1106,11 +1106,11 @@ public class Invoice extends javax.swing.JFrame {
         jPanel27.setBackground(new java.awt.Color(250, 250, 250));
         jPanel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
 
-        tfinvprice.setFont(new java.awt.Font("Futura Md BT", 0, 20)); // NOI18N
-        tfinvprice.setForeground(new java.awt.Color(102, 102, 102));
-        tfinvprice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        tfinvprice.setText("54,000.00");
-        tfinvprice.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        jlinvprice.setFont(new java.awt.Font("Futura Md BT", 0, 20)); // NOI18N
+        jlinvprice.setForeground(new java.awt.Color(102, 102, 102));
+        jlinvprice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlinvprice.setText("54,000.00");
+        jlinvprice.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel30.setText("Rs.");
@@ -1123,12 +1123,12 @@ public class Invoice extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfinvprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlinvprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tfinvprice, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+            .addComponent(jlinvprice, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
             .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1256,6 +1256,11 @@ public class Invoice extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton8.setText("Pay & Print");
         jButton8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton9.setText("Payment options");
@@ -1426,7 +1431,7 @@ public class Invoice extends javax.swing.JFrame {
                 tbModelINV.addRow(v);
             }
 
-            es.JSuggestionTABLE(evt, jPanel32, jTable2, tfsearchItems, jPanel10, jPopupMenu1, jTextField10, null);
+            es.JSuggestionTABLE(evt, jPanel32, jTable2, tfsearchItems, jPanel10, jPopupMenu1, tftechno, null);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
@@ -1532,17 +1537,17 @@ public class Invoice extends javax.swing.JFrame {
             while (rs.next()) {
                 v.add(rs.getString(1) + "-" + rs.getString(2));
             }
-            es.JSuggestionField(evt, v, tftechnician, jPanel23, jPopupMenu2, jTextField10, jButton5);
+            es.JSuggestionField(evt, v, tftechnician, jPanel23, jPopupMenu2, tftechno, jButton5);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_tftechnicianKeyReleased
     Vector vc = new Vector();
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        JTextField[] jt = {tftechnician, jTextField10};
+    private void tftechnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftechnoActionPerformed
+        JTextField[] jt = {tftechnician, tftechno};
         boolean result = es.checkEMPTY(jt);
         if (!result) {
-            String tec = tftechnician.getText() + "-" + jTextField10.getText();
+            String tec = tftechnician.getText() + "-" + tftechno.getText();
             vc.add(tec);
             jList1.setListData(vc);
             es.clearTFS(jt);
@@ -1552,20 +1557,20 @@ public class Invoice extends javax.swing.JFrame {
             es.clearTFS(jt);
             tftechnician.grabFocus();
         }
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_tftechnoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTextField10ActionPerformed(evt);
+        //jTextField10ActionPerformed(evt);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         String lastChar = tfdis.getText().substring(tfdis.getText().length() - 1);
         if (lastChar.equals("%")) {
-            double tot = Double.parseDouble(tfinvprice.getText().replace(",", ""));
+            double tot = Double.parseDouble(jlinvprice.getText().replace(",", ""));
             String dis = tfdis.getText().substring(0, tfdis.getText().length() - 1);
             jltot.setText(dftot.format(tot - tot*(Double.parseDouble(dis)/100)));
         } else {
-            double tot = Double.parseDouble(tfinvprice.getText().replace(",", ""));
+            double tot = Double.parseDouble(jlinvprice.getText().replace(",", ""));
             double dis = Double.parseDouble(tfdis.getText());
             jltot.setText(dftot.format(tot - dis));
             tfdis.setText("");
@@ -1575,7 +1580,7 @@ public class Invoice extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jltot.setText(tfinvprice.getText());
+        jltot.setText(jlinvprice.getText());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tftechnicianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftechnicianActionPerformed
@@ -1585,6 +1590,29 @@ public class Invoice extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+      //  JTextField jt[] = {tfinvprice, tfdis};
+        try {
+            //Saving data in invoice header table
+            String sql = "INSERT INTO invoice_header VALUES('"+jlinvno.getText()+"', '"+jldate.getText()+"', '"+jltime.getText()+"', '"+jlcashier.getText()+"', '"+jlbranch.getText()+"', '"+tfcusname.getText()+"', '"+tfcuscontact.getText()+"', '"+tfvehicle.getText()+"', '"+tfaddress.getText()+"', '"+jlinvprice.getText().replace(",", "")+"', '"+tfdis.getText()+"', '"+jltot.getText().replace(",", "")+"', 'status')";
+            DB.Execute(sql);
+            
+            //Saving data in invoice detail file
+            for(int row = 0; row < tbModleINV.getRowCount(); row++){
+                String sql2 = "INSERT INTO invoice_detail VALUES('"+jlinvno.getText()+"', '"+tbModleINV.getValueAt(row, 0)+"', '"+tbModleINV.getValueAt(row, 1)+"', '"+tbModleINV.getValueAt(row, 2)+"', '"+tbModleINV.getValueAt(row, 3)+"', '"+tbModleINV.getValueAt(row, 4)+"', '"+tbModleINV.getValueAt(row, 5)+"', '"+tbModleINV.getValueAt(row, 6)+"')";
+                DB.Execute(sql2);
+            }
+            
+            //Saving data in invoice technician file
+            DB.Execute("INSERT INTO inv_technician VALUES('"+tftechno.getText()+"', '"+tftechnician.getText()+"', 'tech commission')");
+            
+            //Saving data in payment file
+            DB.Execute("INSERT INTO payment VALUES('"+jlinvno.getText()+"', 'paid amount', 'inv payment method', 'comment')");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1615,7 +1643,6 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1634,7 +1661,6 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
@@ -1642,11 +1668,8 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -1688,20 +1711,25 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel jlbranch;
+    private javax.swing.JLabel jlcashier;
+    private javax.swing.JLabel jldate;
+    private javax.swing.JLabel jlinvno;
+    private javax.swing.JLabel jlinvprice;
+    private javax.swing.JLabel jltime;
     private javax.swing.JLabel jltot;
+    private javax.swing.JTextField tfaddress;
+    private javax.swing.JTextField tfcuscontact;
+    private javax.swing.JTextField tfcusname;
     private javax.swing.JTextField tfdis;
     private javax.swing.JTextField tfdiscount;
     private javax.swing.JTextField tfid;
-    private javax.swing.JLabel tfinvprice;
     private javax.swing.JTextField tfprice;
     private javax.swing.JTextField tfqty;
     private javax.swing.JTextField tfsearchItems;
     private javax.swing.JTextField tftechnician;
+    private javax.swing.JTextField tftechno;
+    private javax.swing.JTextField tfvehicle;
     // End of variables declaration//GEN-END:variables
 
     private void setCOLORSTB(JTable table) {
