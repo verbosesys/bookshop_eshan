@@ -1249,11 +1249,21 @@ public class Invoice_gen extends javax.swing.JFrame {
             try {
                 ResultSet rs = DB.search("SELECT * FROM invoice_header WHERE inv_id = '" + jlinvid.getText() + "'");
                 if (rs.next()) {
+                    //Saving files on invoice header file
                     DB.Execute("DELETE * FROM invoice_header WHERE inv_id = '" + jlinvid.getText() + "'");
                     DB.Execute("INSERT INTO invoice_header VALUES('" + jlinvid.getText() + "','" + jldate.getText() + "', '" + jltime.getText() + "', '" + jlinvcashier.getText() + "', '" + jlinvbranch.getText() + "', '" + tfcusname.getText() + "', '" + tfcuscontact.getText() + "', '" + tfcusvehicleno.getText() + "', '" + tfcusaddress.getText() + "', '" + jlinvprice.getText().replace(",", "") + "', '" + tfdis.getText() + "', '" + jltot.getText().replace(",", "") + "', '" + jltot.getText() + "')");
+                    //Saving files on invoice detail file
+                    for(int row = 0; row < tbl.getRowCount(); row++){
+                        DB.Execute("DELETE * FROM invoice_detail WHERE inv_id = '" + jlinvid.getText() + "'");
+                        DB.Execute("INSERT INTO invoice_detail VALUES('"+jlinvid.getText()+"', '"+tbl.getValueAt(row, 0)+"', '"+tbl.getValueAt(row, 1)+"', '"+tbl.getValueAt(row, 2)+"', '"+tbl.getValueAt(row, 3)+"', '"+tbl.getValueAt(row, 4)+"', '"+tbl.getValueAt(row, 5)+"')");
+                    }
                 } else {
+                    //Saving data on invoice header file
                     DB.Execute("INSERT INTO invoice_header VALUES('" + jlinvid.getText() + "','" + jldate.getText() + "', '" + jltime.getText() + "', '" + jlinvcashier.getText() + "', '" + jlinvbranch.getText() + "', '" + tfcusname.getText() + "', '" + tfcuscontact.getText() + "', '" + tfcusvehicleno.getText() + "', '" + tfcusaddress.getText() + "', '" + jlinvprice.getText().replace(",", "") + "', '" + tfdis.getText() + "', '" + jltot.getText().replace(",", "") + "', '" + jltot.getText() + "')");
-
+                    //Saving data on invoice detail file
+                    for(int row = 0; row < tbl.getRowCount(); row++){
+                        DB.Execute("INSERT INTO invoice_detail VALUES('"+jlinvid.getText()+"', '"+tbl.getValueAt(row, 0)+"', '"+tbl.getValueAt(row, 1)+"', '"+tbl.getValueAt(row, 2)+"', '"+tbl.getValueAt(row, 3)+"', '"+tbl.getValueAt(row, 4)+"', '"+tbl.getValueAt(row, 5)+"')");
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
