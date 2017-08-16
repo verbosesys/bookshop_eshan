@@ -15,9 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.Vector;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -29,8 +29,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -50,6 +52,7 @@ public class Essencials {
     boolean kk = true;
     Dimension s;
     JList jlRsuggestion;
+    JTable jlRsuggestiontb;
     JScrollPane Scrollpane;
     Border btfin;
     Border btfout;
@@ -57,7 +60,6 @@ public class Essencials {
     public Essencials() {
         btfin = new MatteBorder(0, 0, 1, 0, new Color(0, 153, 204));
         btfout = new MatteBorder(0, 0, 1, 0, new Color(220, 220, 220));
-        System.out.println("test");
     }
 
     public void setCenter(JFrame frame) {
@@ -165,7 +167,7 @@ public class Essencials {
 
             jlRsuggestion = new JList();
             jlRsuggestion.setBackground(new java.awt.Color(255, 255, 255));
-            jlRsuggestion.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+            jlRsuggestion.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
             jlRsuggestion.setForeground(new java.awt.Color(70, 70, 70));
             jlRsuggestion.setSelectionBackground(new Color(245, 245, 245));
             jlRsuggestion.setSelectionForeground(new Color(0, 153, 204));
@@ -189,9 +191,9 @@ public class Essencials {
                 }
             }
 
-            jlRsuggestion.setFixedCellHeight(30);
+            jlRsuggestion.setFixedCellHeight(20);
             if (bu != null) {
-                jlRsuggestion.setFixedCellWidth(tf.getWidth() + bu.getWidth() - 16);
+                jlRsuggestion.setFixedCellWidth(tf.getWidth() + bu.getWidth() - 21);
             } else {
                 jlRsuggestion.setFixedCellWidth(tf.getWidth() - 21);
             }
@@ -208,8 +210,8 @@ public class Essencials {
                     if (ar.length < 2) {
                         tf.setText(jlRsuggestion.getSelectedValue().toString());
                     } else {
-                        tf.setText(ar[1]);
-                        // secondTF.setText(ar[0]);
+                        tf.setText(ar[0]);
+                        secondTF.setText(ar[1]);
                     }
                     if (evt.getKeyCode() != 40 & evt.getKeyCode() != 38 & evt.getKeyCode() != 10) {
                         tf.grabFocus();
@@ -239,7 +241,7 @@ public class Essencials {
                     if (ar.length < 2) {
                         tf.setText(jlRsuggestion.getSelectedValue().toString());
                     } else {
-                        tf.setText(ar[1]);
+                        tf.setText(ar[0]);
                         //secondTF.setText(ar[0]);
                     }
 
@@ -285,7 +287,7 @@ public class Essencials {
                 if (ar.length < 2) {
                     tf.setText(jlRsuggestion.getSelectedValue().toString());
                 } else {
-                    tf.setText(ar[1]);
+                    tf.setText(ar[0]);
                     // secondTF.setText(ar[0]);
                 }
             }
@@ -356,8 +358,8 @@ public class Essencials {
 
     public void customTBHEAD(JTable table, String tbVals[], int rows, Color c) {
         JTableHeader head = table.getTableHeader();
-        head.setBackground(new java.awt.Color(252, 252, 252));
-        head.setPreferredSize(new Dimension(100, 30));
+        head.setBackground(new java.awt.Color(250, 250, 250));
+        head.setPreferredSize(new Dimension(100, 35));
         TableColumnModel tableColumnModel = head.getColumnModel();
         TableCellRenderer renderer = new JComponentTableCellRenderer();
         Font tbHFont = new Font("Segoe UI", Font.PLAIN, 12);
@@ -371,36 +373,6 @@ public class Essencials {
                 labelTBH.setBorder(new MatteBorder(0, 0, 1, 1, c));
             }
             labelTBH.setForeground(Color.GRAY);
-            column.setHeaderRenderer(renderer);
-            column.setHeaderValue(labelTBH);
-        }
-    }
-
-    public void customTBHEADSP(JTable table, String tbVals[], int rows, Color c) {
-        JTableHeader head = table.getTableHeader();
-        head.setBackground(new java.awt.Color(252, 252, 252));
-        head.setPreferredSize(new Dimension(100, 30));
-        TableColumnModel tableColumnModel = head.getColumnModel();
-        TableCellRenderer renderer = new JComponentTableCellRenderer();
-        Font tbHFont = new Font("Segoe UI", Font.PLAIN, 12);
-        for (int i = 0; i < rows; i++) {
-            TableColumn column = tableColumnModel.getColumn(i);
-            JTextField labelTBH = new JTextField(tbVals[i]);
-            labelTBH.setHorizontalAlignment(JTextField.CENTER);
-            labelTBH.setFont(tbHFont);
-            labelTBH.setBackground(new Color(252, 252, 252));
-            if (i == (rows - 1)) {
-                labelTBH.setBorder(new MatteBorder(0, 0, 1, 0, c));
-            } else {
-                labelTBH.setBorder(new MatteBorder(0, 0, 1, 1, c));
-            }
-            labelTBH.setForeground(Color.GRAY);
-            if (i == 3 | i == 4) {
-                labelTBH.setBackground(new Color(232, 245, 233));
-            }
-            if (i == 6 | i == 7) {
-                labelTBH.setBackground(new Color(225,245,254));
-            }
             column.setHeaderRenderer(renderer);
             column.setHeaderValue(labelTBH);
         }
@@ -436,20 +408,177 @@ public class Essencials {
         }
     }
 
-    public void INVno(boolean isupdate, JTextField tf, String cat) {
+    public void JSuggestionFieldSP(java.awt.event.KeyEvent evt, Vector v, final JTextField tf, JPanel mainpanel, final JPopupMenu jPopupMenu, final JTextField secondTF, JButton bu) {
         try {
-            ResultSet nosrs = DB.search("SELECT no FROM nos WHERE cat='" + cat + "'");
-            int no = 0;
-            while (nosrs.next()) {
-                no = nosrs.getInt(1);
+
+            jlRsuggestion = new JList();
+            jlRsuggestion.setBackground(new java.awt.Color(255, 255, 255));
+            jlRsuggestion.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+            jlRsuggestion.setForeground(new java.awt.Color(70, 70, 70));
+            jlRsuggestion.setSelectionBackground(new Color(0, 102, 204));
+            jlRsuggestion.setSelectionForeground(new Color(255, 255, 255));
+            jlRsuggestion.setBorder(new MatteBorder(0, 10, 0, 10, Color.WHITE));
+
+            Scrollpane = new JScrollPane();
+            Scrollpane.setBorder(null);
+            Scrollpane.setViewportView(jlRsuggestion);
+
+            Scrollpane.setPreferredSize(new Dimension(600, 400));
+            //jlRsuggestion.setPreferredSize(new Dimension(500, 300));
+
+            if (evt != null && "".equals(tf.getText())) {
+                if (jPopupMenu.isVisible()) {
+                    jPopupMenu.setVisible(false);
+                }
+                return;
             }
-            if (isupdate) {
-                no++;
-                DB.Execute("UPDATE nos SET no='" + no + "' WHERE cat='" + cat + "' ");
+
+            if (evt == null || evt.getKeyCode() == 10) {
+                if (jPopupMenu.isVisible()) {
+                    jPopupMenu.setVisible(false);
+                    return;
+                }
             }
-            tf.setText("" + no);
+
+            jlRsuggestion.setFixedCellHeight(30);
+
+            if (bu != null) {
+                jlRsuggestion.setFixedCellWidth(tf.getWidth() + bu.getWidth() + 50);
+            } else {
+                jlRsuggestion.setFixedCellWidth(tf.getWidth() + 200);
+            }
+            jlRsuggestion.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+                    listSelecterKey(evt);
+                }
+
+                private void listSelecterKey(KeyEvent evt) {
+                    // if (jlRsuggestion.getSelectedIndex() > 0) {
+                    //   if ((jlRsuggestion.getSelectedValue().toString() != null) || (!jlRsuggestion.getSelectedValue().toString().equals(""))) {
+                    String ar[] = jlRsuggestion.getSelectedValue().toString().split("-");
+                    if (ar.length < 2) {
+                        tf.setText(jlRsuggestion.getSelectedValue().toString());
+                    } else {
+                        tf.setText(ar[0]);
+                        // secondTF.setText(ar[0]);
+                    }
+                    if (evt.getKeyCode() != 40 & evt.getKeyCode() != 38 & evt.getKeyCode() != 10) {
+                        tf.grabFocus();
+                        tf.selectAll();
+                    }
+                    if (evt.getKeyCode() == 10) {
+                        if (jPopupMenu.isVisible()) {
+                            jPopupMenu.setVisible(false);
+                            if (tf != null) {
+                                tf.grabFocus();
+                            }
+                        }
+                    }
+                    //  }
+                    //}
+                }
+            });
+
+            jlRsuggestion.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    listSelectMouse(evt);
+                }
+
+                private void listSelectMouse(MouseEvent evt) {
+                    String ar[] = jlRsuggestion.getSelectedValue().toString().split("-");
+                    if (ar.length < 2) {
+                        tf.setText(jlRsuggestion.getSelectedValue().toString());
+                    } else {
+                        tf.setText(ar[0]);
+                        //secondTF.setText(ar[0]);
+                    }
+
+                    if (evt.getClickCount() == 2) {
+                        if (jPopupMenu.isVisible()) {
+                            jPopupMenu.setVisible(false);
+                            if (tf != null) {
+                                tf.grabFocus();
+                            }
+                        }
+                    }
+
+//                    tf.setText(jlRsuggestion.getSelectedValue().toString());
+//                    if (jPopupMenu.isVisible()) {
+//                        jPopupMenu.setVisible(false);
+//                        if (tf != null) {
+//                            tf.grabFocus();
+//                        }
+//                    }
+                }
+            });
+            if (v.isEmpty()) {
+                if (jPopupMenu.isVisible()) {
+                    jPopupMenu.setVisible(false);
+                }
+                return;
+            }
+
+            jPopupMenu.setVisible(false);
+
+            jlRsuggestion.removeAll();
+            jlRsuggestion.setListData(v);
+            jPopupMenu.removeAll();
+            jPopupMenu.add(Scrollpane);
+            jPopupMenu.show(mainpanel, tf.getX(), tf.getY() + tf.getHeight() - 1);
+
+            tf.grabFocus();
+
+            if (evt != null && evt.getKeyCode() == 40) {
+                jlRsuggestion.grabFocus();
+                jlRsuggestion.setSelectedIndex(0);
+                String ar[] = jlRsuggestion.getSelectedValue().toString().split("-");
+                if (ar.length < 2) {
+                    tf.setText(jlRsuggestion.getSelectedValue().toString());
+                } else {
+                    tf.setText(ar[1]);
+                    // secondTF.setText(ar[0]);
+                }
+            }
+            if (evt != null && evt.getKeyCode() == 10) {
+                jPopupMenu.setVisible(false);
+                if (secondTF != null) {
+                    secondTF.grabFocus();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void JSuggestionTABLE(java.awt.event.KeyEvent evt, JPanel t, JTable tb, final JTextField tf, JPanel mainpanel, final JPopupMenu jPopupMenu, final JTextField secondTF, JButton bu) {
+
+        jPopupMenu.setVisible(false);
+        jPopupMenu.removeAll();
+        jPopupMenu.add(t);
+        jPopupMenu.show(mainpanel, tf.getX(), tf.getY() + tf.getHeight());
+        tf.grabFocus();
+
+        if (tb.getRowCount() <= 0) {
+            jPopupMenu.setVisible(false);
+        } else if (tf.getText().equals("") || tf.getText() == null) {
+            jPopupMenu.setVisible(false);
+        }
+
+        if (evt != null && evt.getKeyCode() == 40) {
+            tb.grabFocus();
+            tb.setRowSelectionInterval(0, 0);
+        }
+    }
+
+    public void createKeybindings(JTable table) {
+        table.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
+        table.getActionMap().put("Enter", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //do something on JTable enter pressed
+            }
+        });
     }
 }

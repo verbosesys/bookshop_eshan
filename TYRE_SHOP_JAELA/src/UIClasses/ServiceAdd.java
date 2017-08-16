@@ -436,7 +436,7 @@ public class ServiceAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_comserviceidKeyTyped
 
     private void bu_gen_combo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_gen_combo3ActionPerformed
-        es.INVno(false, comserviceid, "hot");
+      //  es.INVno(false, comserviceid, "hot");
     }//GEN-LAST:event_bu_gen_combo3ActionPerformed
 
     private void bu_gen_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_gen_comboActionPerformed

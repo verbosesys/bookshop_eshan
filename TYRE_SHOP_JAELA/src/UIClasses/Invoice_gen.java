@@ -9,11 +9,20 @@ import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import java.awt.Color;
 import java.awt.Frame;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import tyre_shop_jaela.DB;
 import tyre_shop_jaela.Essencials;
 
@@ -22,18 +31,25 @@ import tyre_shop_jaela.Essencials;
  * @author Nalaranga
  */
 public class Invoice_gen extends javax.swing.JFrame {
-
+    
     Essencials es;
     DefaultTableModel tbl;
-
+    DefaultTableModel tbl2;
+    
     public Invoice_gen() {
         initComponents();
         es = new Essencials();
         es.setCenter(this);
-
+        
         String[] headings = {"Item ID", "Item Name", "Warranty", "Qty", "Price", "Discount"};
         es.customTBHEAD(jTable1, headings, 6, new java.awt.Color(224, 224, 224));
         tbl = (DefaultTableModel) jTable1.getModel();
+        
+        String[] headings2 = {"Tyre ID", "Rim Size", "Size 1", "Size 2", "Size 3", "Cost", "Price.Gen"};
+        es.customTBHEAD(jTable3, headings2, 7, new java.awt.Color(224, 224, 224));
+        tbl2 = (DefaultTableModel) jTable3.getModel();
+        
+        es.createKeybindings(jTable3);
     }
 
     /**
@@ -45,6 +61,10 @@ public class Invoice_gen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPanel21 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -127,6 +147,40 @@ public class Invoice_gen extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
+        jPopupMenu1.setBackground(new java.awt.Color(250, 250, 250));
+
+        jPanel21.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(224, 224, 224)));
+
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+
+        jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+            }
+        ));
+        jTable3.setRowHeight(23);
+        jTable3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable3KeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
@@ -188,7 +242,7 @@ public class Invoice_gen extends javax.swing.JFrame {
 
         jlinvid.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jlinvid.setForeground(new java.awt.Color(204, 204, 204));
-        jlinvid.setText("MB0001");
+        jlinvid.setText("MB0005");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -485,6 +539,11 @@ public class Invoice_gen extends javax.swing.JFrame {
         tfdiscount.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         tfdiscount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfdiscount.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tfdiscount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfdiscountKeyReleased(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(253, 253, 253));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/arrow-208-16.png"))); // NOI18N
@@ -556,6 +615,11 @@ public class Invoice_gen extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton2.setText("Add to invoice");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jPanel14.setBackground(new java.awt.Color(250, 250, 250));
         jPanel14.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(224, 224, 224)));
@@ -689,6 +753,11 @@ public class Invoice_gen extends javax.swing.JFrame {
         jTable1.setRowHeight(23);
         jTable1.setSelectionBackground(new java.awt.Color(253, 253, 253));
         jTable1.setSelectionForeground(new java.awt.Color(255, 51, 102));
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(60);
@@ -1168,11 +1237,33 @@ public class Invoice_gen extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void tfsearchItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsearchItemsActionPerformed
-
+        try {
+            String itemid = tfid.getText();
+            setValues(itemid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_tfsearchItemsActionPerformed
 
     private void tfsearchItemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfsearchItemsKeyReleased
-
+        try {
+            ResultSet rs = DB.search("SELECT * FROM rim WHERE rim_size LIKE '" + tfsearchItems.getText() + "%'");
+            tbl2.setRowCount(0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString(1));
+                v.add(rs.getString(3));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+                v.add(rs.getString(7));
+                v.add(rs.getString(11));
+                v.add(rs.getString(12));
+                tbl2.addRow(v);
+            }
+            es.JSuggestionTABLE(evt, jPanel21, jTable3, tfsearchItems, jPanel10, jPopupMenu1, tfsearchItems, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_tfsearchItemsKeyReleased
 
     private void tfqtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfqtyActionPerformed
@@ -1193,6 +1284,9 @@ public class Invoice_gen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tfpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfpriceActionPerformed
+        
+        jButton2ActionPerformed(evt);
+        
 
     }//GEN-LAST:event_tfpriceActionPerformed
 
@@ -1202,6 +1296,20 @@ public class Invoice_gen extends javax.swing.JFrame {
             tfqty.setText("");
             tfqty.grabFocus();
         }
+        if (evt.getKeyCode() == 13) {
+            tfdiscount.grabFocus();
+            tfdiscount.selectAll();
+        }
+        if (tfprice.getText().isEmpty()) {
+            try {
+                ResultSet rs = DB.search("SELECT price FROM rim WHERE tyre_id = '" + tfid.getText() + "'");
+                if (rs.next()) {
+                    tfprice.setText(rs.getString(10));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_tfpriceKeyReleased
 
     private void comwarrantyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comwarrantyKeyReleased
@@ -1210,6 +1318,10 @@ public class Invoice_gen extends javax.swing.JFrame {
             tfsearchItems.setText("");
             tfsearchItems.grabFocus();
         }
+        if (evt.getKeyCode() == 10) {
+            tfqty.grabFocus();
+            tfqty.selectAll();
+        }
     }//GEN-LAST:event_comwarrantyKeyReleased
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1217,7 +1329,7 @@ public class Invoice_gen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
+        
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1240,36 +1352,106 @@ public class Invoice_gen extends javax.swing.JFrame {
     private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
         this.dispose();
     }//GEN-LAST:event_jLabel31MouseClicked
-
+    
+    String cus_name, contact_no, vehicle_no, cus_address;
     private void btnPayAndPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayAndPrintActionPerformed
         JTextField[] jt = {tfcusname, tfcuscontact, tfcusvehicleno, tfcusaddress, tfprice, tfdis};
         JLabel[] jl = {jlinvid, jldate, jltime, jlinvcashier, jlinvbranch, jltot};
-        boolean result = es.checkEMPTY(jt);
-        if (!result) {
+        //boolean result = es.checkEMPTY(jt);
+        if (!tfprice.getText().isEmpty()) {
             try {
+                //String cus_name, contact_no, vehicle_no, cus_address;
+                if (tfcusname.getText().isEmpty()) {
+                    cus_name = "GUEST";
+                    contact_no = "-";
+                    vehicle_no = "-";
+                    cus_address = "-";
+                } else {
+                    cus_name = tfcusname.getText();
+                    contact_no = tfcuscontact.getText();
+                    vehicle_no = tfcusvehicleno.getText();
+                    cus_address = tfcusaddress.getText();
+                }
                 ResultSet rs = DB.search("SELECT * FROM invoice_header WHERE inv_id = '" + jlinvid.getText() + "'");
                 if (rs.next()) {
                     //Saving files on invoice header file
                     DB.Execute("DELETE * FROM invoice_header WHERE inv_id = '" + jlinvid.getText() + "'");
-                    DB.Execute("INSERT INTO invoice_header VALUES('" + jlinvid.getText() + "','" + jldate.getText() + "', '" + jltime.getText() + "', '" + jlinvcashier.getText() + "', '" + jlinvbranch.getText() + "', '" + tfcusname.getText() + "', '" + tfcuscontact.getText() + "', '" + tfcusvehicleno.getText() + "', '" + tfcusaddress.getText() + "', '" + jlinvprice.getText().replace(",", "") + "', '" + tfdis.getText() + "', '" + jltot.getText().replace(",", "") + "', '" + jltot.getText() + "')");
+                    DB.Execute("INSERT INTO invoice_header VALUES('" + jlinvid.getText() + "','" + jldate.getText() + "', '" + jltime.getText() + "', '" + jlinvcashier.getText() + "', '" + jlinvbranch.getText() + "', '" + cus_name + "', '" + contact_no + "', '" + vehicle_no + "', '" + cus_address + "', '" + jlinvprice.getText().replace(",", "") + "', '" + tfdis.getText() + "', '" + jltot.getText().replace(",", "") + "', '" + jltot.getText() + "')");
                     //Saving files on invoice detail file
-                    for(int row = 0; row < tbl.getRowCount(); row++){
+                    for (int row = 0; row < tbl.getRowCount(); row++) {
                         DB.Execute("DELETE * FROM invoice_detail WHERE inv_id = '" + jlinvid.getText() + "'");
-                        DB.Execute("INSERT INTO invoice_detail VALUES('"+jlinvid.getText()+"', '"+tbl.getValueAt(row, 0)+"', '"+tbl.getValueAt(row, 1)+"', '"+tbl.getValueAt(row, 2)+"', '"+tbl.getValueAt(row, 3)+"', '"+tbl.getValueAt(row, 4)+"', '"+tbl.getValueAt(row, 5)+"')");
+                        DB.Execute("INSERT INTO invoice_detail VALUES('" + jlinvid.getText() + "', '" + tbl.getValueAt(row, 0) + "', '" + tbl.getValueAt(row, 1) + "', '" + tbl.getValueAt(row, 2) + "', '" + tbl.getValueAt(row, 3) + "', '" + tbl.getValueAt(row, 4) + "', '" + tbl.getValueAt(row, 5) + "')");
                     }
                 } else {
                     //Saving data on invoice header file
-                    DB.Execute("INSERT INTO invoice_header VALUES('" + jlinvid.getText() + "','" + jldate.getText() + "', '" + jltime.getText() + "', '" + jlinvcashier.getText() + "', '" + jlinvbranch.getText() + "', '" + tfcusname.getText() + "', '" + tfcuscontact.getText() + "', '" + tfcusvehicleno.getText() + "', '" + tfcusaddress.getText() + "', '" + jlinvprice.getText().replace(",", "") + "', '" + tfdis.getText() + "', '" + jltot.getText().replace(",", "") + "', '" + jltot.getText() + "')");
+                    DB.Execute("INSERT INTO invoice_header VALUES('" + jlinvid.getText() + "','" + jldate.getText() + "', '" + jltime.getText() + "', '" + jlinvcashier.getText() + "', '" + jlinvbranch.getText() + "', '" + cus_name + "', '" + contact_no + "', '" + vehicle_no + "', '" + cus_address + "', '" + jlinvprice.getText().replace(",", "") + "', '" + tfdis.getText() + "', '" + jltot.getText().replace(",", "") + "', '" + jltot.getText() + "')");
                     //Saving data on invoice detail file
-                    for(int row = 0; row < tbl.getRowCount(); row++){
-                        DB.Execute("INSERT INTO invoice_detail VALUES('"+jlinvid.getText()+"', '"+tbl.getValueAt(row, 0)+"', '"+tbl.getValueAt(row, 1)+"', '"+tbl.getValueAt(row, 2)+"', '"+tbl.getValueAt(row, 3)+"', '"+tbl.getValueAt(row, 4)+"', '"+tbl.getValueAt(row, 5)+"')");
+                    for (int row = 0; row < tbl.getRowCount(); row++) {
+                        DB.Execute("INSERT INTO invoice_detail VALUES('" + jlinvid.getText() + "', '" + tbl.getValueAt(row, 0) + "', '" + tbl.getValueAt(row, 1) + "', '" + tbl.getValueAt(row, 2) + "', '" + tbl.getValueAt(row, 3) + "', '" + tbl.getValueAt(row, 4) + "', '" + tbl.getValueAt(row, 5) + "')");
                     }
                 }
+                printBill();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnPayAndPrintActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JTextField[] jt = {tfsearchItems, comwarranty, tfqty, tfprice, tfid};
+        if (!es.checkEMPTY(jt)) {
+            Vector v = new Vector();
+            v.add(tfid.getText());
+            v.add(tfsearchItems.getText());
+            v.add(comwarranty.getText());
+            v.add(tfqty.getText());
+            v.add(tfprice.getText());
+            v.add("");
+            if (!tfdiscount.getText().isEmpty()) {
+                v.add((Double.parseDouble(tfprice.getText()) * Double.parseDouble(tfqty.getText())) - Double.parseDouble(tfdiscount.getText()));
+            } else {
+                v.add((Double.parseDouble(tfprice.getText()) * Double.parseDouble(tfqty.getText())));
+            }
+            
+            tbl.addRow(v);
+            //clear text fields 
+            es.clearTFS(jt);
+            tfsearchItems.grabFocus();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        //DELETE key code = 127
+        if (evt.getKeyCode() == 127) {
+            tbl.removeRow(jTable1.getSelectedRow());
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void tfdiscountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdiscountKeyReleased
+
+    }//GEN-LAST:event_tfdiscountKeyReleased
+
+    private void jTable3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable3KeyReleased
+        //System.out.println(evt.getKeyCode());
+        if (evt.getKeyCode() == 10) {
+            try {
+                ResultSet rs = DB.search("SELECT * FROM rim WHERE tyre_id = '" + tbl2.getValueAt(jTable3.getSelectedRow(), 0).toString() + "'");
+                System.out.println(tbl2.getValueAt(jTable3.getSelectedRow(), 1).toString());
+                if (rs.next()) {
+                    tfid.setText(rs.getString(1));
+                    tfsearchItems.setText(rs.getString(3));
+                    comwarranty.setText("-");
+                    tfqty.setText("0");
+                    tfprice.setText(rs.getString(12)); //Price gen
+                    jPopupMenu1.setVisible(false);
+                    tfqty.grabFocus();
+                    tfqty.selectAll();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jTable3KeyReleased
 
     /**
      * @param args the command line arguments
@@ -1335,6 +1517,7 @@ public class Invoice_gen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
@@ -1350,8 +1533,11 @@ public class Invoice_gen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable3;
     private javax.swing.JLabel jldate;
     private javax.swing.JLabel jlinvbranch;
     private javax.swing.JLabel jlinvcashier;
@@ -1370,4 +1556,44 @@ public class Invoice_gen extends javax.swing.JFrame {
     private javax.swing.JTextField tfqty;
     private javax.swing.JTextField tfsearchItems;
     // End of variables declaration//GEN-END:variables
+
+    private void printBill() {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("inv_id", jlinvid.getText());
+            params.put("inv_date", jldate.getText());
+            params.put("inv_time", jltime.getText());
+            params.put("inv_cashier", jlinvcashier.getText());
+            params.put("inv_branch", jlinvbranch.getText());
+            params.put("cus_name", cus_name);
+            params.put("cus_contact", contact_no);
+            params.put("cus_vehicle", vehicle_no);
+            params.put("cus_address", cus_address);
+            params.put("inv_total", jlinvprice.getText());
+            params.put("inv_discount", tfdis.getText());
+            params.put("inv_grandtotal", jltot.getText());
+            params.put("inv_cash", jltot.getText());
+            params.put("inv_balance", "");
+            
+            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\Verbose_User\\Desktop\\invoice.jrxml");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JRTableModelDataSource(jTable1.getModel()));
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void setValues(String id) throws Exception {
+        ResultSet rs = DB.search("SELECT * FROM rim WHERE tyre_id = '" + id + "'");
+        if (rs.next()) {
+            
+            tfsearchItems.setText(rs.getString(3));
+            //tfid.setText(rs.getString(1));
+            tfqty.setText("0");
+            tfprice.setText(rs.getString(12)); //Price gen
+            jPopupMenu1.setVisible(false);
+            tfqty.grabFocus();
+            tfqty.selectAll();
+        }
+    }
 }

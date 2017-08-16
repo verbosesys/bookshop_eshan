@@ -47,7 +47,7 @@ public class TyreAdd extends javax.swing.JFrame {
         comtyreid = new javax.swing.JTextField();
         bu_gen_combo3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        comnoofrim = new javax.swing.JTextField();
+        comrimsize = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tftyresize1 = new javax.swing.JTextField();
         bu_gen_combo = new javax.swing.JButton();
@@ -191,11 +191,11 @@ public class TyreAdd extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("රීම් ප්‍රමාණය");
 
-        comnoofrim.setBackground(new java.awt.Color(252, 252, 252));
-        comnoofrim.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
-        comnoofrim.setForeground(new java.awt.Color(204, 102, 0));
-        comnoofrim.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(220, 220, 220)));
-        comnoofrim.setPreferredSize(new java.awt.Dimension(59, 28));
+        comrimsize.setBackground(new java.awt.Color(252, 252, 252));
+        comrimsize.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
+        comrimsize.setForeground(new java.awt.Color(204, 102, 0));
+        comrimsize.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(220, 220, 220)));
+        comrimsize.setPreferredSize(new java.awt.Dimension(59, 28));
 
         jLabel4.setFont(new java.awt.Font("Noto Sans Sinhala", 0, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -309,7 +309,7 @@ public class TyreAdd extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(comvehiclegroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comnoofrim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(comrimsize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bu_gen_combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,7 +346,7 @@ public class TyreAdd extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comnoofrim, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comrimsize, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bu_gen_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
@@ -554,7 +554,7 @@ public class TyreAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_comtyreidKeyTyped
 
     private void bu_gen_combo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_gen_combo3ActionPerformed
-        es.INVno(false, comtyreid, "hot");
+//        es.INVno(false, comtyreid, "hot");
     }//GEN-LAST:event_bu_gen_combo3ActionPerformed
 
     private void bu_gen_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_gen_comboActionPerformed
@@ -566,7 +566,7 @@ public class TyreAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_bu_gen_combo1ActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        JTextField[] jt = {comtyreid, tfbrand, comnoofrim, comvehiclegroup, tftyresize1, tftyresize2, tfpricegen};
+        JTextField[] jt = {comtyreid, tfbrand, comrimsize, comvehiclegroup, tftyresize1, tftyresize2, tfpricegen};
         boolean result = es.checkEMPTY(jt);
         if(!result){
             try {
@@ -574,14 +574,14 @@ public class TyreAdd extends javax.swing.JFrame {
                 if(rs.next()){
                     try {
                         DB.Execute("DELETE * FROM rim WHERE tyre_id = '"+comtyreid.getText()+"'");
-                        DB.Execute("INSERT INTO rim VALUES('"+comtyreid.getText()+"', '"+tfbrand.getText()+"', '"+comnoofrim.getText()+"', '"+comvehiclegroup.getText()+"', '"+tftyresize1.getText()+"', '"+tftyresize2.getText()+"', '"+tftyresize3.getText()+"', '"+tftyresize4.getText()+"', '"+tfrackid.getText()+"', '"+tfrackrow.getText()+"', '"+tfprice.getText()+"', '"+tfpricegen.getText()+"', '"+tfdis1.getText()+"', '"+tfdis2.getText()+"', '"+tfdis3.getText()+"')");
+                        DB.Execute("INSERT INTO rim VALUES('"+comtyreid.getText()+"', '"+tfbrand.getText()+"', '"+comrimsize.getText()+"', '"+comvehiclegroup.getText()+"', '"+tftyresize1.getText()+"', '"+tftyresize2.getText()+"', '"+tftyresize3.getText()+"', '"+tftyresize4.getText()+"', '"+tfrackid.getText()+"', '"+tfrackrow.getText()+"', '"+tfprice.getText()+"', '"+tfpricegen.getText()+"', '"+tfdis1.getText()+"', '"+tfdis2.getText()+"', '"+tfdis3.getText()+"')");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 else{
                     try {
-                        DB.Execute("INSERT INTO rim VALUES('"+comtyreid.getText()+"', '"+tfbrand.getText()+"', '"+comnoofrim.getText()+"', '"+comvehiclegroup.getText()+"', '"+tftyresize1.getText()+"', '"+tftyresize2.getText()+"', '"+tftyresize3.getText()+"', '"+tftyresize4.getText()+"', '"+tfrackid.getText()+"', '"+tfrackrow.getText()+"', '"+tfprice.getText()+"', '"+tfpricegen.getText()+"', '"+tfdis1.getText()+"', '"+tfdis2.getText()+"', '"+tfdis3.getText()+"')");
+                        DB.Execute("INSERT INTO rim VALUES('"+comtyreid.getText()+"', '"+tfbrand.getText()+"', '"+comrimsize.getText()+"', '"+comvehiclegroup.getText()+"', '"+tftyresize1.getText()+"', '"+tftyresize2.getText()+"', '"+tftyresize3.getText()+"', '"+tftyresize4.getText()+"', '"+tfrackid.getText()+"', '"+tfrackrow.getText()+"', '"+tfprice.getText()+"', '"+tfpricegen.getText()+"', '"+tfdis1.getText()+"', '"+tfdis2.getText()+"', '"+tfdis3.getText()+"')");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -589,7 +589,7 @@ public class TyreAdd extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            JTextField[] jt2 = {comtyreid, tfbrand, comnoofrim, comvehiclegroup, tftyresize1, tftyresize2, tftyresize3, tftyresize4, tfrackid, tfrackrow, tfprice, tfpricegen, tfdis1, tfdis2, tfdis3};
+            JTextField[] jt2 = {comtyreid, tfbrand, comrimsize, comvehiclegroup, tftyresize1, tftyresize2, tftyresize3, tftyresize4, tfrackid, tfrackrow, tfprice, tfpricegen, tfdis1, tfdis2, tfdis3};
             es.clearTFS(jt2);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -615,7 +615,7 @@ public class TyreAdd extends javax.swing.JFrame {
     private javax.swing.JButton bu_gen_combo;
     private javax.swing.JButton bu_gen_combo1;
     private javax.swing.JButton bu_gen_combo3;
-    private javax.swing.JTextField comnoofrim;
+    private javax.swing.JTextField comrimsize;
     public static javax.swing.JTextField comtyreid;
     private javax.swing.JTextField comvehiclegroup;
     private javax.swing.JLabel jLabel1;

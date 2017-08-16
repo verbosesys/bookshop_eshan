@@ -505,7 +505,7 @@ public class BatteryAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_combatidKeyTyped
 
     private void bu_gen_combo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_gen_combo3ActionPerformed
-        es.INVno(false, combatid, "hot");
+//        es.INVno(false, combatid, "hot");
     }//GEN-LAST:event_bu_gen_combo3ActionPerformed
 
     private void bu_gen_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_gen_comboActionPerformed

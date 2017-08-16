@@ -219,7 +219,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="comvehiclegroup" max="32767" attributes="0"/>
-                                  <Component id="comnoofrim" max="32767" attributes="0"/>
+                                  <Component id="comrimsize" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -266,7 +266,7 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="comnoofrim" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="comrimsize" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="bu_gen_combo" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -378,7 +378,7 @@
                 <Property name="text" type="java.lang.String" value="&#xdbb;&#xdd3;&#xdb8;&#xdca; &#xdb4;&#xdca;&#x200d;&#xdbb;&#xdb8;&#xdcf;&#xdab;&#xdba;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="comnoofrim">
+            <Component class="javax.swing.JTextField" name="comrimsize">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="fc" green="fc" red="fc" type="rgb"/>
