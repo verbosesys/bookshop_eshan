@@ -16,15 +16,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -306,7 +316,7 @@ public class Invoice extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(220, 220, 220)));
 
         jlinvno.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jlinvno.setText("MB0001");
+        jlinvno.setText("MB0003");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -694,6 +704,11 @@ public class Invoice extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton2.setText("Add to invoice");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jPanel14.setBackground(new java.awt.Color(250, 250, 250));
         jPanel14.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(224, 224, 224)));
@@ -1494,7 +1509,7 @@ public class Invoice extends javax.swing.JFrame {
         v.add(comwarranty.getText());
         v.add(tfqty.getText());
         v.add(tfprice.getText());
-        v.add("0");
+        v.add(tfdiscount.getText());
         double tot = Double.parseDouble(tfqty.getText()) * Double.parseDouble(tfprice.getText());
         v.add(df.format(tot));
         tbModleINV.addRow(v);
@@ -1593,7 +1608,8 @@ public class Invoice extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
       //  JTextField jt[] = {tfinvprice, tfdis};
-        try {
+      if(tbModleINV.getRowCount() != 0){
+          try {
             //Saving data in invoice header table
             String sql = "INSERT INTO invoice_header VALUES('"+jlinvno.getText()+"', '"+jldate.getText()+"', '"+jltime.getText()+"', '"+jlcashier.getText()+"', '"+jlbranch.getText()+"', '"+tfcusname.getText()+"', '"+tfcuscontact.getText()+"', '"+tfvehicle.getText()+"', '"+tfaddress.getText()+"', '"+jlinvprice.getText().replace(",", "")+"', '"+tfdis.getText()+"', '"+jltot.getText().replace(",", "")+"', 'status')";
             DB.Execute(sql);
@@ -1605,14 +1621,40 @@ public class Invoice extends javax.swing.JFrame {
             }
             
             //Saving data in invoice technician file
-            DB.Execute("INSERT INTO inv_technician VALUES('"+tftechno.getText()+"', '"+tftechnician.getText()+"', 'tech commission')");
+            ListModel model = jList1.getModel();
+            for(int i=0; i<model.getSize(); i++){
+                String element = model.getElementAt(i).toString();
+                String[] arg = element.split("-");
+                DB.Execute("INSERT INTO inv_technician VALUES('"+arg[1]+"', '"+arg[0]+"', '')");
+            }
             
             //Saving data in payment file
-            DB.Execute("INSERT INTO payment VALUES('"+jlinvno.getText()+"', 'paid amount', 'inv payment method', 'comment')");
+            DB.Execute("INSERT INTO payment VALUES('"+jlinvno.getText()+"', '0.0', 'inv payment method', 'comment')");
+            
+            //Printing bill 
+            printBill();
         } catch (Exception e) {
             e.printStackTrace();
         }
+      } else{
+          JOptionPane.showMessageDialog(rootPane, "No Items available");
+      }  
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JTextField[] jt = {tfsearchItems, comwarranty, tfqty, tfprice, tfdiscount, tfid};
+        if(!es.checkEMPTY(jt)){
+            Vector v = new Vector();
+            v.add(tfid.getText());
+            v.add(tfsearchItems.getText());
+            v.add(comwarranty.getText());
+            v.add(tfqty.getText());
+            v.add(tfprice.getText());
+            v.add(tfdiscount.getText());
+            v.add((Double.parseDouble(tfprice.getText())*Double.parseDouble(tfqty.getText()))- Double.parseDouble(tfdiscount.getText()));
+            tbModleINV.addRow(v);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1773,7 +1815,31 @@ public class Invoice extends javax.swing.JFrame {
             tfqty.grabFocus();
             tfqty.selectAll();
         }
-
     }
-
+    
+    private void printBill(){
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("inv_no", jlinvno.getText());
+            params.put("inv_date", jldate.getText());
+            params.put("inv_time", jltime.getText());
+            params.put("inv_cashier", jlcashier.getText());
+            params.put("inv_customer", tfcusname.getText());
+            params.put("cus_contact", tfcuscontact.getText());
+            params.put("cus_vehicle_no", tfvehicle.getText());
+            params.put("cus_address", tfaddress.getText());
+            params.put("inv_branch", jlbranch.getText());
+            params.put("inv_tot", jlinvprice.getText());
+            params.put("inv_discount", tfdis.getText());
+            params.put("inv_grandtotal", jltot.getText());
+            params.put("inv_cash", jltot.getText());
+            params.put("inv_balance", "0");
+            
+            JasperReport jasperReport = JasperCompileManager.compileReport("C:/AUTO/invoice_temp.jrxml");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JRTableModelDataSource(jTable1.getModel()));
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
