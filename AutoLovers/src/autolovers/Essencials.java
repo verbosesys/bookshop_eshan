@@ -581,4 +581,12 @@ public class Essencials {
             }
         });
     }
+    public double getMouseX(){
+        double x = MouseInfo.getPointerInfo().getLocation().getX();
+        return x;
+    }
+    public double getMouseY(){
+        double y = MouseInfo.getPointerInfo().getLocation().getY();
+        return y;
+    }
 }
