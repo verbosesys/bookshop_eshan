@@ -84,6 +84,7 @@ public abstract class FeeRevMonth extends javax.swing.JFrame {
         SetDates(true);
         setMonths(CURYear, CURMonth, CURDate);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

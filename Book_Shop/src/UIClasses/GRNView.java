@@ -23,28 +23,30 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import book_shop.DB;
 import book_shop.Essencials;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Nalaranga
  */
-public class Invoices extends javax.swing.JFrame {
+public class GRNView extends javax.swing.JFrame {
 
     Essencials es;
 
     String serDate1;
     String serDate2;
-    String sercustID;
-    String serinvID;
-    String serUser;
+    String serSuptID;
+    String serGRNID;
+
 
     String today;
     SimpleDateFormat sdf;
-    DefaultTableModel tbmINVS;
+    DefaultTableModel tbmGRN;
     DefaultTableModel tbmINV_ITEMS;
     DecimalFormat df;
 
-    public Invoices() {
+    public GRNView() {
         initComponents();
         es = new Essencials();
         es.setCenter(this);
@@ -52,24 +54,25 @@ public class Invoices extends javax.swing.JFrame {
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         today = sdf.format(new Date());
         serDate1 = today;
-        tffrDate_INVR.setText(today);
+        tffrDate.setText(today);
         df = new DecimalFormat("###,###.00");
 
-        String tbVals[] = {"Inv. ID", "Date", "Time", "Cashier", "Customer", "Sub.tot", "Total", "Disc.", "Dis. Amo.", "Items", "Cash", "Balance"};
-        es.customTBHEAD(jTable1, tbVals, 12, new java.awt.Color(224, 224, 224));
+        String tbVals[] = {"GRN. ID", "Date", "Time", "Cashier", "Supplier", "Sub.tot", "Total", "Disc.", "Dis. Amo.", "Items", "Inv. Date"};
+        es.customTBHEAD(jTable1, tbVals, 11, new java.awt.Color(224, 224, 224));
 
         String vals[] = {"No.","Item ID","Item Name","Qty","price","Discount","Amount"};
         es.customTBHEAD(jTable3, vals, 7, new java.awt.Color(224, 224, 224));
 
-        tbmINVS = (DefaultTableModel) jTable1.getModel();
+        tbmGRN = (DefaultTableModel) jTable1.getModel();
         tbmINV_ITEMS = (DefaultTableModel) jTable3.getModel();
+        
+        try {
+            searchAll("SELECT * FROM grn_header");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
-    private static Invoices invoicesinstance = new Invoices();
-    public static Invoices getInstance(){
-      return invoicesinstance;
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,23 +103,21 @@ public class Invoices extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         bu_prod_save1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        tffrDate_INVR = new javax.swing.JTextField();
-        tftoDate_INVR = new javax.swing.JTextField();
+        tffrDate = new javax.swing.JTextField();
+        tftoDate = new javax.swing.JTextField();
         buTO = new javax.swing.JButton();
         buFROM = new javax.swing.JButton();
-        bu_prod_save = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btClear = new javax.swing.JButton();
+        btSave = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        tfcashi_INVR = new javax.swing.JTextField();
-        tfinvno_INVR = new javax.swing.JTextField();
-        tfcustno_INVR = new javax.swing.JTextField();
+        tfsup = new javax.swing.JTextField();
+        tfgrn = new javax.swing.JTextField();
         lbNoofnvs = new javax.swing.JLabel();
         lbAllValue = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
 
         jPanel8.setBackground(new java.awt.Color(252, 252, 252));
 
@@ -268,7 +269,7 @@ public class Invoices extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 243, 224));
-        jLabel8.setText("Previous invoices");
+        jLabel8.setText("Previous Good Receiving Notes");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -276,7 +277,7 @@ public class Invoices extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -311,11 +312,11 @@ public class Invoices extends javax.swing.JFrame {
 
             },
             new String [] {
-                "", "", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "null", "null", "null"
+                "", "", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "null", "null", "null", "null"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -369,15 +370,15 @@ public class Invoices extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(250, 250, 250));
 
-        tffrDate_INVR.setBackground(new java.awt.Color(253, 253, 253));
-        tffrDate_INVR.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tffrDate_INVR.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 0, new java.awt.Color(224, 224, 224)));
-        tffrDate_INVR.setPreferredSize(new java.awt.Dimension(59, 28));
+        tffrDate.setBackground(new java.awt.Color(253, 253, 253));
+        tffrDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tffrDate.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 0, new java.awt.Color(224, 224, 224)));
+        tffrDate.setPreferredSize(new java.awt.Dimension(59, 28));
 
-        tftoDate_INVR.setBackground(new java.awt.Color(253, 253, 253));
-        tftoDate_INVR.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tftoDate_INVR.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 0, new java.awt.Color(224, 224, 224)));
-        tftoDate_INVR.setPreferredSize(new java.awt.Dimension(59, 28));
+        tftoDate.setBackground(new java.awt.Color(253, 253, 253));
+        tftoDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tftoDate.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 0, new java.awt.Color(224, 224, 224)));
+        tftoDate.setPreferredSize(new java.awt.Dimension(59, 28));
 
         buTO.setBackground(new java.awt.Color(255, 255, 255));
         buTO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/date-to-16.png"))); // NOI18N
@@ -399,25 +400,25 @@ public class Invoices extends javax.swing.JFrame {
             }
         });
 
-        bu_prod_save.setBackground(new java.awt.Color(235, 235, 235));
-        bu_prod_save.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        bu_prod_save.setForeground(new java.awt.Color(51, 51, 51));
-        bu_prod_save.setText("Clear");
-        bu_prod_save.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 215, 215)));
-        bu_prod_save.addActionListener(new java.awt.event.ActionListener() {
+        btClear.setBackground(new java.awt.Color(235, 235, 235));
+        btClear.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btClear.setForeground(new java.awt.Color(51, 51, 51));
+        btClear.setText("Clear");
+        btClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 215, 215)));
+        btClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bu_prod_saveActionPerformed(evt);
+                btClearActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(235, 235, 235));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Show");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 215, 215)));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSave.setBackground(new java.awt.Color(235, 235, 235));
+        btSave.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btSave.setForeground(new java.awt.Color(51, 51, 51));
+        btSave.setText("Show");
+        btSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 215, 215)));
+        btSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSaveActionPerformed(evt);
             }
         });
 
@@ -432,20 +433,15 @@ public class Invoices extends javax.swing.JFrame {
             }
         });
 
-        tfcashi_INVR.setBackground(new java.awt.Color(253, 253, 253));
-        tfcashi_INVR.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfcashi_INVR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
-        tfcashi_INVR.setPreferredSize(new java.awt.Dimension(59, 28));
+        tfsup.setBackground(new java.awt.Color(253, 253, 253));
+        tfsup.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tfsup.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        tfsup.setPreferredSize(new java.awt.Dimension(59, 28));
 
-        tfinvno_INVR.setBackground(new java.awt.Color(253, 253, 253));
-        tfinvno_INVR.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfinvno_INVR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
-        tfinvno_INVR.setPreferredSize(new java.awt.Dimension(59, 28));
-
-        tfcustno_INVR.setBackground(new java.awt.Color(253, 253, 253));
-        tfcustno_INVR.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfcustno_INVR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
-        tfcustno_INVR.setPreferredSize(new java.awt.Dimension(59, 28));
+        tfgrn.setBackground(new java.awt.Color(253, 253, 253));
+        tfgrn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tfgrn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        tfgrn.setPreferredSize(new java.awt.Dimension(59, 28));
 
         lbNoofnvs.setBackground(new java.awt.Color(253, 253, 253));
         lbNoofnvs.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -475,20 +471,14 @@ public class Invoices extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Search by cashier name");
+        jLabel11.setText("Search by supplier number");
         jLabel11.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(224, 224, 224)));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Search by invoice number");
+        jLabel12.setText("Search by GRN number");
         jLabel12.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(224, 224, 224)));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Search by customer name");
-        jLabel13.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(224, 224, 224)));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -497,30 +487,31 @@ public class Invoices extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfcashi_INVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfcustno_INVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfsup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbNoofnvs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbAllValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfinvno_INVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(bu_prod_save, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfgrn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tffrDate_INVR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tftoDate_INVR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(tffrDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tftoDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buTO, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buFROM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -535,29 +526,25 @@ public class Invoices extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buTO, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(tffrDate_INVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tffrDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(tftoDate_INVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tftoDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(tfcashi_INVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfsup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(tfinvno_INVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tfcustno_INVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(tfgrn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bu_prod_save, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(lbAllValue, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbNoofnvs, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -625,7 +612,7 @@ public class Invoices extends javax.swing.JFrame {
         new FeeRevMonth() {
             @Override
             void fetch(String year, String month, String date, JFrame frame) {
-                tffrDate_INVR.setText(year + "-" + month + "-" + date);
+                tffrDate.setText(year + "-" + month + "-" + date);
                 frame.dispose();
             }
         }.setVisible(true);
@@ -635,58 +622,58 @@ public class Invoices extends javax.swing.JFrame {
         new FeeRevMonth() {
             @Override
             void fetch(String year, String month, String date, JFrame frame) {
-                tftoDate_INVR.setText(year + "-" + month + "-" + date);
+                tftoDate.setText(year + "-" + month + "-" + date);
                 frame.dispose();
             }
         }.setVisible(true);
     }//GEN-LAST:event_buTOActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
         try {
-            serDate1 = tffrDate_INVR.getText();
-            serDate2 = tftoDate_INVR.getText();
-            serUser = tfcashi_INVR.getText();
-            sercustID = tfcustno_INVR.getText();
-            serinvID = tfinvno_INVR.getText();
-            filterContent();
+            serDate1 = tffrDate.getText();
+            serDate2 = tftoDate.getText();     
+            serSuptID = tfsup.getText();
+            serGRNID = tfgrn.getText();
+            if(serDate1.isEmpty() && serDate2.isEmpty() && serSuptID.isEmpty() && serGRNID.isEmpty()){
+                System.out.println("if");
+                searchAll("SELECT * FROM grn_header ORDER BY grnno DESC LIMIT 1000");
+            } else {
+                System.out.println("else");
+                filterContent();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btSaveActionPerformed
 
-    private void bu_prod_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_prod_saveActionPerformed
+    private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
 
         try {
-            tfcashi_INVR.setText("");
-            tfcustno_INVR.setText("");
-            tfinvno_INVR.setText("");
-            tftoDate_INVR.setText("");
+            tfsup.setText("");
+            tfgrn.setText("");
+            tftoDate.setText("");
             serDate1 = today;
             serDate2 = "";
-            serUser = "";
-            sercustID = "";
-            serinvID = "";
-
-            tffrDate_INVR.setText(today);
+            serSuptID = "";
+            serGRNID = "";
+            tffrDate.setText("");
             filterContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-    }//GEN-LAST:event_bu_prod_saveActionPerformed
+    }//GEN-LAST:event_btClearActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             serDate1 = today;
             serDate2 = "";
-            tftoDate_INVR.setText("");
+            tftoDate.setText("");
 
-            serUser = tfcashi_INVR.getText();
-            sercustID = tfcustno_INVR.getText();
-            serinvID = tfinvno_INVR.getText();
-
-            tffrDate_INVR.setText(today);
+            serSuptID = tfsup.getText();
+            serGRNID = tfgrn.getText();
+            tffrDate.setText(today);
             filterContent();
         } catch (Exception e) {
             e.printStackTrace();
@@ -718,9 +705,9 @@ public class Invoices extends javax.swing.JFrame {
 //                while (rsinco.next()) {
 //                    v.add(rsinco.getString(2) + " Rs." + rsinco.getString(3) + " by " + rsinco.getString(4));
 //                }
-                String tott = tbmINVS.getValueAt(jTable1.getSelectedRow(), 6).toString();
+                String tott = tbmGRN.getValueAt(jTable1.getSelectedRow(), 6).toString();
                 lbTotal.setText(df.format(Double.parseDouble(tott)));
-                lbBilldate.setText(tbmINVS.getValueAt(jTable1.getSelectedRow(), 1).toString());
+                lbBilldate.setText(tbmGRN.getValueAt(jTable1.getSelectedRow(), 1).toString());
               //  jList1.setListData(v);
                 jPopupMenu1.removeAll();
                 jPopupMenu1.add(jPanel7);
@@ -743,9 +730,9 @@ public class Invoices extends javax.swing.JFrame {
                 @Override
                 void ifYes() {
                     try {
-                        DB.Execute("DELETE FROM invoice WHERE inv_id='" + tbmINVS.getValueAt(i, 0).toString() + "'");
-                        DB.Execute("DELETE FROM inv_items WHERE inv_id='" + tbmINVS.getValueAt(i, 0).toString() + "'");
-                        DB.Execute("DELETE FROM payments WHERE inv_id='" + tbmINVS.getValueAt(i, 0).toString() + "'");
+                        DB.Execute("DELETE FROM invoice WHERE inv_id='" + tbmGRN.getValueAt(i, 0).toString() + "'");
+                        DB.Execute("DELETE FROM inv_items WHERE inv_id='" + tbmGRN.getValueAt(i, 0).toString() + "'");
+                        DB.Execute("DELETE FROM payments WHERE inv_id='" + tbmGRN.getValueAt(i, 0).toString() + "'");
                         filterContent();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -771,7 +758,7 @@ public class Invoices extends javax.swing.JFrame {
             public void run() {
                 try {
                     UIManager.setLookAndFeel(new WindowsClassicLookAndFeel());
-                    new Invoices().setVisible(true);
+                    new GRNView().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -780,16 +767,15 @@ public class Invoices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btClear;
+    private javax.swing.JButton btSave;
     private javax.swing.JButton buFROM;
     private javax.swing.JButton buTO;
-    private javax.swing.JButton bu_prod_save;
     private javax.swing.JButton bu_prod_save1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -813,11 +799,10 @@ public class Invoices extends javax.swing.JFrame {
     private javax.swing.JLabel lbBilldate;
     private javax.swing.JLabel lbNoofnvs;
     private javax.swing.JLabel lbTotal;
-    private javax.swing.JTextField tfcashi_INVR;
-    private javax.swing.JTextField tfcustno_INVR;
-    private javax.swing.JTextField tffrDate_INVR;
-    private javax.swing.JTextField tfinvno_INVR;
-    private javax.swing.JTextField tftoDate_INVR;
+    private javax.swing.JTextField tffrDate;
+    private javax.swing.JTextField tfgrn;
+    private javax.swing.JTextField tfsup;
+    private javax.swing.JTextField tftoDate;
     // End of variables declaration//GEN-END:variables
 
     private void setCOLORSTB(JTable table) {
@@ -845,51 +830,44 @@ public class Invoices extends javax.swing.JFrame {
     private void filterContent() throws Exception {
 
         String Date;
-        String Customer;
-        String Invoice;
-        String user;
+        String Supplier;
+        String GRN;
 
         if (!"".equals(serDate1) & "".equals(serDate2)) {
             Date = " date LIKE '" + serDate1 + "%'";
         } else if (!"".equals(serDate1) & !"".equals(serDate2)) {
             Date = " date BETWEEN '" + serDate1 + "%' AND '" + serDate2 + "%'";
         } else {
-            tffrDate_INVR.setText(today);
-            tftoDate_INVR.setText("");
-            Date = " date LIKE '" + today + "%'";
+            tffrDate.setText("");
+            tftoDate.setText("");
+            Date = " date LIKE '%";
         }
-        if (!"".equals(sercustID)) {
-            Customer = " AND customer LIKE '" + sercustID + "%'";
+        if (!"".equals(serSuptID)) {
+            Supplier = " AND grnsupplier LIKE '" + serSuptID + "%'";
         } else {
-            Customer = "";
+            Supplier = "";
         }
-        if (!"".equals(serinvID)) {
-            Invoice = " AND invno LIKE '" + serinvID + "%'";
+        if (!"".equals(serGRNID)) {
+            GRN = " AND grnno LIKE '" + serGRNID + "%'";
         } else {
-            Invoice = "";
+            GRN = "";
         }
-        if (!"".equals(serUser)) {
-            user = " AND cashier LIKE '" + serUser + "%'";
-        } else {
-            user = "";
-        }
-        String query = "SELECT * FROM inv_header WHERE" + Date + Customer + Invoice + user;
+        
+        String query = "SELECT * FROM grn_header WHERE" + Date + Supplier + GRN;
         searchAll(query);
     }
 
     private void searchAll(String query) throws Exception {
         ResultSet rs = DB.search(query);
-        tbmINVS.setRowCount(0);
+        tbmGRN.setRowCount(0);
         double tots = 0;
         while (rs.next()) {
             Vector v = new Vector();
             v.add(rs.getString(1));
             v.add(rs.getString(2));
             v.add(rs.getString(3));
-
             tots = tots + rs.getDouble(7);
             v.add(rs.getString(4));
-
             v.add(rs.getString(5));
             v.add(rs.getString(6));
             v.add(rs.getString(7));
@@ -897,11 +875,10 @@ public class Invoices extends javax.swing.JFrame {
             v.add(rs.getString(9));
             v.add(rs.getString(10));
             v.add(rs.getString(11));
-            v.add(rs.getString(12));
-            tbmINVS.addRow(v);
+            tbmGRN.addRow(v);
         }
         setCOLORSTB(jTable1);
         lbAllValue.setText(df.format(tots));
-        lbNoofnvs.setText(tbmINVS.getRowCount() + " Invoices");
+        lbNoofnvs.setText(tbmGRN.getRowCount() + " GRNs");
     }
 }

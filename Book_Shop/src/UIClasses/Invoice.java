@@ -190,6 +190,7 @@ public class Invoice extends javax.swing.JFrame {
         jbprevbill_INV5 = new javax.swing.JButton();
         jbprevbill_INV6 = new javax.swing.JButton();
         jbprevbill_INV7 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jPanel32.setBackground(new java.awt.Color(250, 250, 250));
 
@@ -1235,13 +1236,25 @@ public class Invoice extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 243, 224));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(239, 108, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/printer-4-16.png"))); // NOI18N
+        jButton3.setText("Print and save invoice");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 183, 77)));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jbprevbill_INV1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1257,25 +1270,28 @@ public class Invoice extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbprevbill_INV6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbprevbill_INV7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbprevbill_INV7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbprevbill_INV3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbprevbill_INV4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1423,7 +1439,13 @@ public class Invoice extends javax.swing.JFrame {
                 }
                 saveBILL();
                 printBill();
-                clearAll();
+                
+                new Messages(1, "Press OK..", "Press OK to continue") {
+                    @Override
+                    void AfterMessageClosed() {
+                        clearAll();
+                    }
+                }.setVisible(true);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1752,22 +1774,28 @@ public class Invoice extends javax.swing.JFrame {
     }//GEN-LAST:event_jbprevbill_INV4ActionPerformed
 
     private void jbprevbill_INV5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbprevbill_INV5ActionPerformed
-        new CatagoryAdd().setVisible(true);
+        Good_receive_note object = Good_receive_note.getInstance();
+        object.setVisible(true);
+        //new CatagoryAdd().setVisible(true);
     }//GEN-LAST:event_jbprevbill_INV5ActionPerformed
 
     private void jbprevbill_INV6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbprevbill_INV6ActionPerformed
-        new Invoices().setVisible(true);
+        Invoices object = Invoices.getInstance();
+        object.setVisible(true);
+        //new Invoices().setVisible(true);
     }//GEN-LAST:event_jbprevbill_INV6ActionPerformed
 
     private void jbprevbill_INV7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbprevbill_INV7ActionPerformed
-        new Income().setVisible(true);
+        Income object = Income.getInstance();
+        object.setVisible(true);
+        //new Income().setVisible(true);
     }//GEN-LAST:event_jbprevbill_INV7ActionPerformed
 
     private void tbnormal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnormal1ActionPerformed
         setSelectedButtons(1);
         changeColor(new java.awt.Color(239, 108, 0), new java.awt.Color(255, 152, 0), new java.awt.Color(255, 243, 224));
         jLabel12.setText("Normal");
-        changeIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-file-16.png")));
+        changeIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-file-16.png")), new javax.swing.ImageIcon(getClass().getResource("/Icons/printer-4-16.png")));
 
         calprices(1);
     }//GEN-LAST:event_tbnormal1ActionPerformed
@@ -1776,7 +1804,7 @@ public class Invoice extends javax.swing.JFrame {
         setSelectedButtons(2);
         changeColor(new java.awt.Color(33, 150, 243), new java.awt.Color(100, 181, 246), new java.awt.Color(227, 242, 253));
         jLabel12.setText("Book List");
-        changeIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-file-16B.png")));
+        changeIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-file-16B.png")), new javax.swing.ImageIcon(getClass().getResource("/Icons/printer-4-B.png")));
 
         calprices(2);
     }//GEN-LAST:event_tbbooklist2ActionPerformed
@@ -1785,10 +1813,14 @@ public class Invoice extends javax.swing.JFrame {
         setSelectedButtons(3);
         changeColor(new java.awt.Color(121, 85, 72), new java.awt.Color(161, 136, 127), new java.awt.Color(239, 235, 233));
         jLabel12.setText("Special Rate");
-        changeIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-file-16BR.png")));
+        changeIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-file-16BR.png")), new javax.swing.ImageIcon(getClass().getResource("/Icons/printer-4-BR.png")));
 
         calprices(3);
     }//GEN-LAST:event_tbspecial3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1809,6 +1841,7 @@ public class Invoice extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -2134,10 +2167,15 @@ public class Invoice extends javax.swing.JFrame {
         tbbooklist2.setBorder(new MatteBorder(0, 1, 0, 0, borderColor));
         tbnormal1.setBackground(bgColor);
         tbnormal1.setBorder(new MatteBorder(0, 1, 0, 0, borderColor));
+        
+        jButton3.setBackground(bgColor2);
+        jButton3.setForeground(bgColor);
+        jButton3.setBorder(new LineBorder(borderColor));
     }
 
-    private void changeIcon(Icon icon) {
-        jButton2.setIcon(icon);
+    private void changeIcon(Icon icon1, Icon icon2) {
+        jButton2.setIcon(icon1);
+        jButton3.setIcon(icon2);
     }
 
     private void calprices(int i) {

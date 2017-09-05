@@ -39,6 +39,10 @@ public class SubCategory extends javax.swing.JFrame {
             //new SysErrMsg(e).setVisible(true);
         }
     }
+    private static SubCategory catinstance = new SubCategory();
+    public static SubCategory getInstance(){
+      return catinstance;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -470,6 +474,7 @@ public class SubCategory extends javax.swing.JFrame {
                 } else {
                     DB.Execute("INSERT INTO subcategory VALUES('" + tfcatNo.getText() + "','" + tfcatName.getText() + "','" + tfdiscription.getText() + "', '"+tfdiscount.getText()+"')");
                     INVno(true);
+                    jTable1.changeSelection(jTable1.getRowCount() - 1, 0, false, false);
                     clearALL();
                 }
             }

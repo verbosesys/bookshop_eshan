@@ -46,8 +46,12 @@ public class CatagoryAdd extends javax.swing.JFrame {
             e.printStackTrace();
             //new SysErrMsg(e).setVisible(true);
         }
+        
     }
-    
+    private static CatagoryAdd catinstance = new CatagoryAdd();
+    public static CatagoryAdd getInstance(){
+      return catinstance;
+    }
 
 
     /**
@@ -472,6 +476,7 @@ public class CatagoryAdd extends javax.swing.JFrame {
                 } else {
                     DB.Execute("INSERT INTO catagories VALUES('" + tfcatNo.getText() + "','" + tfcatName.getText() + "','" + tfdiscription.getText() + "')");
                     INVno(true);
+                    jTable1.changeSelection(jTable1.getRowCount() - 1, 0, false, false);
                     clearALL();
                 }
             }

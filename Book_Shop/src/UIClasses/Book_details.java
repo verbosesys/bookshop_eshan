@@ -55,7 +55,7 @@ public class Book_details extends javax.swing.JFrame {
     private static Book_details instance = new Book_details();
     public static Book_details getInstance(){
       return instance;
-   }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -845,6 +845,7 @@ public class Book_details extends javax.swing.JFrame {
                     DB.Execute("INSERT INTO items VALUES('" + tfitemid.getText() + "','" + tfitemname.getText() + "','" + tfcat.getText() + "','" + tfsubcat.getText() + "','" + tfunit.getText() + "','" + tfsellprice.getText() + "','" + tfsellprice2.getText() + "','" + tfdiscount.getText() + "','" + tfcost.getText() + "','" + tfstock.getText() + "','" + tfsupplier.getText() + "')");
                     clearAll();
                     queryGEN();
+                    jTable1.changeSelection(jTable1.getRowCount() - 1, 0, false, false);
                     if (Double.parseDouble(tfitemid.getText()) < 10000) {
                         INVno(true);
                     }
@@ -966,7 +967,9 @@ public class Book_details extends javax.swing.JFrame {
     }//GEN-LAST:event_tfitemidActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new CatagoryAdd().setVisible(true);
+        CatagoryAdd object = CatagoryAdd.getInstance();
+        object.setVisible(true);
+        //new CatagoryAdd().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tfitemnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfitemnameActionPerformed
@@ -1049,7 +1052,8 @@ public class Book_details extends javax.swing.JFrame {
     }//GEN-LAST:event_tfsubcatKeyReleased
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        SubCategory object = SubCategory.getInstance();
+        object.setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed

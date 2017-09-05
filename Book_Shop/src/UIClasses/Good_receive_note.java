@@ -89,6 +89,11 @@ public class Good_receive_note extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
+    private static Good_receive_note grninstance = new Good_receive_note();
+    public static Good_receive_note getInstance(){
+      return grninstance;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1167,7 +1172,7 @@ public class Good_receive_note extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
@@ -1705,6 +1710,7 @@ public class Good_receive_note extends javax.swing.JFrame {
             DB.Execute("INSERT INTO grn_header VALUES('" + lbgrnno.getText() + "','" + dtTM + "','" + timeTM + "','" + lbcashier.getText() + "','" + tfsupname.getText() + "','" + subtot + "','" + tot + "','" + dis + "','" + disamo + "','" + items + "','" + tfinvdate.getText() + "')");
             //DB.Execute("INSERT INTO payments VALUES('" + lbgrnno.getText() + "','" + dtTM + "','" + timeTM + "','" + tot + "','" + lbcashier.getText() + "')");
             INVno(true);
+            jTable1.changeSelection(jTable1.getRowCount() - 1, 0, false, false);
         }
     }
 
