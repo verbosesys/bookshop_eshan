@@ -310,7 +310,7 @@ public class Essencials {
                 float p = 1.0f;
                 while (p >= 0.01f) {
                     fg.setOpacity(Float.parseFloat(def.format(p)));
-                    p = p - 0.01f;
+                    p = p - 0.1f;
                     if (Float.parseFloat(def.format(p)) == 0.2f) {
                         fg.dispose();
                         Thread.yield();

@@ -5,6 +5,7 @@
  */
 package UIClasses;
 
+import book_shop.CheckUser;
 import book_shop.DB;
 import book_shop.Essencials;
 import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
@@ -60,6 +61,14 @@ public class Invoice extends javax.swing.JFrame {
         initComponents();
         es = new Essencials();
         es.setCenter(this);
+        es.maximizeWin(this);
+
+        if ("User".equals(CheckUser.loggedPerson)) {
+            jbprevbill_INV7.setEnabled(false);
+        }
+
+          lbcashier.setText(CheckUser.loggedUsername);
+        
         dftot = new DecimalFormat("#,###,###,###.00");
         dfNor = new DecimalFormat("0.00");
         sdfdate = new SimpleDateFormat("yyyy-MM-dd");
@@ -1179,6 +1188,11 @@ public class Invoice extends javax.swing.JFrame {
         jbprevbill_INV3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbprevbill_INV3.setIconTextGap(5);
         jbprevbill_INV3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbprevbill_INV3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbprevbill_INV3ActionPerformed(evt);
+            }
+        });
 
         jbprevbill_INV4.setBackground(new java.awt.Color(245, 245, 245));
         jbprevbill_INV4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -1355,7 +1369,8 @@ public class Invoice extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        System.exit(0);
+        new Login_SC().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
@@ -1416,6 +1431,18 @@ public class Invoice extends javax.swing.JFrame {
                     setColorsTB(jTable1);
                 }
             }.setVisible(true);
+        } else if (evt.getKeyCode() == 116) {
+            //F5 Key press - Normal
+            tbnormal1ActionPerformed(null);
+            
+        } else if (evt.getKeyCode() == 117) {
+            //F6 Key press - Book List
+            tbbooklist2ActionPerformed(null);
+            
+        } else if (evt.getKeyCode() == 118) {
+            //F7 Key press - Special Rates
+            tbspecial3ActionPerformed(null);
+            
         } else if (evt.getKeyCode() == 113) {
             tfdis.grabFocus();
             tfdis.selectAll();
@@ -1439,7 +1466,7 @@ public class Invoice extends javax.swing.JFrame {
                 }
                 saveBILL();
                 printBill();
-                
+
                 new Messages(1, "Press OK..", "Press OK to continue") {
                     @Override
                     void AfterMessageClosed() {
@@ -1566,11 +1593,72 @@ public class Invoice extends javax.swing.JFrame {
         if (evt.getKeyCode() == 127) {
             clearupper();
         }
+        if(evt.getKeyCode() == 119){
+            tfprice.grabFocus();
+            tfprice.selectAll();
+        }
     }//GEN-LAST:event_tfqtyKeyReleased
 
     private void tfpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfpriceActionPerformed
+        //tfqtyActionPerformed(evt);
+        if (tfsearchItems.getText().isEmpty()) {
+            es.toolt(tfsearchItems, "Select an item first");
+            tfsearchItems.grabFocus();
+            return;
+        }
 
+        try {
+            ResultSet rs = DB.search("SELECT sell_price,sell_price2,itemname,discount FROM items WHERE iditems='" + tfid.getText() + "'");
+            if (rs.next()) {
+                //tfprice.setText(rs.getString(1));
+                tfsearchItems.setText(rs.getString(3));
+                if ("Normal".equals(jLabel12.getText())) {
+                    tfdiscount.setText(rs.getString(4));
+                }
 
+                Vector v = new Vector();
+
+                for (int i = 0; i < tbModleinv.getRowCount(); i++) {
+                    String id = tbModleinv.getValueAt(i, 1).toString();
+                    if (id.equals(tfid.getText())) {
+                        tfqty.setText(Double.parseDouble(tbModleinv.getValueAt(i, 3).toString()) + Double.parseDouble(tfqty.getText()) + "");
+                        tbModleinv.removeRow(i);
+                    }
+                }
+
+                v.add("");
+                v.add(tfid.getText());
+                v.add(tfsearchItems.getText());
+                v.add(tfqty.getText());
+
+                String newPrice = tfprice.getText();
+
+                if (!tfdiscount.getText().isEmpty()) {
+                    String lastChar = tfdiscount.getText().substring(tfdiscount.getText().length() - 1);
+                    if (lastChar.equals("%")) {
+                        double tot = Double.parseDouble(tfprice.getText().replace(",", ""));
+                        String dis = tfdiscount.getText().substring(0, tfdiscount.getText().length() - 1);
+                        newPrice = (dfNor.format(tot - tot * (Double.parseDouble(dis) / 100)));
+                    } else {
+                        double tot = Double.parseDouble(tfprice.getText().replace(",", ""));
+                        double dis = Double.parseDouble(tfdiscount.getText());
+                        newPrice = (dfNor.format(tot - dis));
+                    }
+                }
+
+                v.add(dfNor.format(Double.parseDouble(tfprice.getText())));
+                v.add(tfdiscount.getText());
+                v.add(Double.parseDouble(tfqty.getText()) * Double.parseDouble(newPrice));
+                tbModleinv.addRow(v);
+
+                clearupper();
+                calTotal();
+                setColorsTB(jTable1);
+                jTable1.changeSelection(jTable1.getRowCount() - 1, 0, false, false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_tfpriceActionPerformed
 
     private void tfpriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfpriceKeyReleased
@@ -1821,6 +1909,11 @@ public class Invoice extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jbprevbill_INV3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbprevbill_INV3ActionPerformed
+        new Login_SC().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbprevbill_INV3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2167,7 +2260,7 @@ public class Invoice extends javax.swing.JFrame {
         tbbooklist2.setBorder(new MatteBorder(0, 1, 0, 0, borderColor));
         tbnormal1.setBackground(bgColor);
         tbnormal1.setBorder(new MatteBorder(0, 1, 0, 0, borderColor));
-        
+
         jButton3.setBackground(bgColor2);
         jButton3.setForeground(bgColor);
         jButton3.setBorder(new LineBorder(borderColor));
@@ -2186,7 +2279,9 @@ public class Invoice extends javax.swing.JFrame {
                     ResultSet rs = DB.search("SELECT discount,sell_price FROM items WHERE iditems='" + itemID + "'");
                     if (rs.next()) {
                         String disc = rs.getString(1);
+                        String sellPrice = rs.getString(2);
                         tbModleinv.setValueAt(disc, j, 5);
+                        tbModleinv.setValueAt(sellPrice, j, 4);
                         double up = rs.getDouble(2);
                         String newp;
 

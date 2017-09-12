@@ -13,15 +13,27 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -108,6 +120,7 @@ public class Book_details extends javax.swing.JFrame {
         tfsubcat = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -116,6 +129,7 @@ public class Book_details extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         tfitemname2 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jPopupMenu1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 1, new java.awt.Color(224, 224, 224)));
 
@@ -477,6 +491,16 @@ public class Book_details extends javax.swing.JFrame {
             }
         });
 
+        jButton13.setBackground(new java.awt.Color(255, 235, 238));
+        jButton13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jButton13.setText("Low Stock");
+        jButton13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 154, 154)));
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -491,7 +515,9 @@ public class Book_details extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -625,7 +651,9 @@ public class Book_details extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -714,6 +742,13 @@ public class Book_details extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -738,6 +773,10 @@ public class Book_details extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(81, 81, 81))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -754,8 +793,10 @@ public class Book_details extends javax.swing.JFrame {
                         .addComponent(tfitemname2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                         .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -974,9 +1015,11 @@ public class Book_details extends javax.swing.JFrame {
 
     private void tfitemnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfitemnameActionPerformed
         tfcat.grabFocus();
+        tfcat.selectAll();
     }//GEN-LAST:event_tfitemnameActionPerformed
 
     private void tfcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfcatActionPerformed
+        tfsubcat.grabFocus();
         tfsubcat.grabFocus();
     }//GEN-LAST:event_tfcatActionPerformed
 
@@ -1006,26 +1049,32 @@ public class Book_details extends javax.swing.JFrame {
 
     private void tfunitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfunitActionPerformed
         tfsellprice.grabFocus();
+        tfsellprice.selectAll();
     }//GEN-LAST:event_tfunitActionPerformed
 
     private void tfsellpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsellpriceActionPerformed
         tfsellprice2.grabFocus();
+        tfsellprice2.selectAll();
     }//GEN-LAST:event_tfsellpriceActionPerformed
 
     private void tfsellprice2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsellprice2ActionPerformed
         tfdiscount.grabFocus();
+        tfdiscount.selectAll();
     }//GEN-LAST:event_tfsellprice2ActionPerformed
 
     private void tfdiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdiscountActionPerformed
         tfcost.grabFocus();
+        tfcost.selectAll();
     }//GEN-LAST:event_tfdiscountActionPerformed
 
     private void tfcostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfcostActionPerformed
         tfstock.grabFocus();
+        tfstock.selectAll();
     }//GEN-LAST:event_tfcostActionPerformed
 
     private void tfstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfstockActionPerformed
         tfsupplier.grabFocus();
+        tfsupplier.selectAll();
     }//GEN-LAST:event_tfstockActionPerformed
 
     private void tfsupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsupplierActionPerformed
@@ -1034,6 +1083,7 @@ public class Book_details extends javax.swing.JFrame {
 
     private void tfsubcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsubcatActionPerformed
         tfunit.grabFocus();
+        tfunit.selectAll();
     }//GEN-LAST:event_tfsubcatActionPerformed
 
     private void tfsubcatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfsubcatKeyReleased
@@ -1060,6 +1110,28 @@ public class Book_details extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        try {
+            searchAll("SELECT * FROM items WHERE stock < 5");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("para_items", jLabel18.getText());
+            
+            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\BSHOP\\ITEM_REPORT.jrxml");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JRTableModelDataSource(jTable1.getModel()));
+            JasperViewer.viewReport(jasperPrint, false);
+           // JasperPrintManager.printReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1081,7 +1153,9 @@ public class Book_details extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1187,7 +1261,11 @@ public class Book_details extends javax.swing.JFrame {
                 if (Integer.parseInt(ar.get(row).toString()) % 2 == 1) {
                     c.setBackground(new java.awt.Color(253, 253, 253));
                 } else {
-                    c.setBackground(new Color(255, 243, 224));
+                    c.setBackground(new Color(240,240,240));
+                }
+                double st = Double.parseDouble(table.getValueAt(row, 9).toString());
+                if (st<5) {
+                    c.setBackground(new java.awt.Color(255,235,238));
                 }
                 return c;
             }
@@ -1226,6 +1304,7 @@ public class Book_details extends javax.swing.JFrame {
             clearAll();
             tfitemid.setText(id);
             tfitemname.grabFocus();
+            tfitemname.selectAll();
         }
     }
 
