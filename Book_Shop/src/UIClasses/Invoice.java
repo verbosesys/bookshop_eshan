@@ -1078,14 +1078,13 @@ public class Invoice extends javax.swing.JFrame {
 
         tfbalinv.setEditable(false);
         tfbalinv.setBackground(new java.awt.Color(250, 250, 250));
-        tfbalinv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
-        tfbalinv.setForeground(new java.awt.Color(255, 183, 77));
+        tfbalinv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         tfbalinv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
         tfcshinv.setEditable(false);
         tfcshinv.setBackground(new java.awt.Color(250, 250, 250));
-        tfcshinv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
-        tfcshinv.setForeground(new java.awt.Color(153, 153, 153));
+        tfcshinv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        tfcshinv.setForeground(new java.awt.Color(102, 102, 102));
         tfcshinv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -1097,13 +1096,13 @@ public class Invoice extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfcustName)
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfcshinv))
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfbalinv, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfbalinv)
+                            .addComponent(tfcshinv))))
                 .addContainerGap())
         );
         jPanel19Layout.setVerticalGroup(
@@ -1299,7 +1298,7 @@ public class Invoice extends javax.swing.JFrame {
                     .addComponent(jbprevbill_INV2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbprevbill_INV4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbprevbill_INV5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2160,7 +2159,7 @@ public class Invoice extends javax.swing.JFrame {
 
             params.put("para_items", tfqty2.getText());
 
-            params.put("para_tota", tftot);
+            params.put("para_tota", tfsubtot.getText());
             String cust = tfcustName.getText();
             if (cust.equals("")) {
                 cust = "GUEST CUSTOMER";

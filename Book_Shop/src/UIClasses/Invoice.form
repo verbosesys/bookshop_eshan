@@ -1770,14 +1770,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="tfcustName" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel21" min="-2" pref="77" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel21" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="jLabel22" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="tfcshinv" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel22" min="-2" pref="77" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="tfbalinv" min="-2" pref="219" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tfbalinv" max="32767" attributes="0"/>
+                                      <Component id="tfcshinv" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1862,10 +1863,7 @@
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI Semibold" size="16" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="4d" green="b7" red="ff" type="rgb"/>
+                      <Font name="Segoe UI Semibold" size="18" style="0"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1883,10 +1881,10 @@
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI Semibold" size="16" style="0"/>
+                      <Font name="Segoe UI Semibold" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="99" green="99" red="99" type="rgb"/>
+                      <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1950,7 +1948,7 @@
                           <Component id="jbprevbill_INV1" min="-2" pref="65" max="-2" attributes="0"/>
                           <Component id="jbprevbill_INV" min="-2" pref="65" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbprevbill_INV4" min="-2" pref="65" max="-2" attributes="0"/>
                           <Component id="jbprevbill_INV5" min="-2" pref="65" max="-2" attributes="0"/>
