@@ -67,8 +67,8 @@ public class Invoice extends javax.swing.JFrame {
             jbprevbill_INV7.setEnabled(false);
         }
 
-          lbcashier.setText(CheckUser.loggedUsername);
-        
+        lbcashier.setText(CheckUser.loggedUsername);
+
         dftot = new DecimalFormat("#,###,###,###.00");
         dfNor = new DecimalFormat("0.00");
         sdfdate = new SimpleDateFormat("yyyy-MM-dd");
@@ -121,6 +121,7 @@ public class Invoice extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -260,6 +261,8 @@ public class Invoice extends javax.swing.JFrame {
         );
 
         jPopupMenu1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 183, 77)));
+
+        jPopupMenu2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 1, new java.awt.Color(224, 224, 224)));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -684,6 +687,16 @@ public class Invoice extends javax.swing.JFrame {
         tfdiscount.setForeground(new java.awt.Color(102, 102, 102));
         tfdiscount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfdiscount.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(224, 224, 224)));
+        tfdiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdiscountActionPerformed(evt);
+            }
+        });
+        tfdiscount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfdiscountKeyReleased(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(253, 253, 253));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/arrow-204-16.png"))); // NOI18N
@@ -1433,17 +1446,18 @@ public class Invoice extends javax.swing.JFrame {
         } else if (evt.getKeyCode() == 116) {
             //F5 Key press - Normal
             tbnormal1ActionPerformed(null);
-            
+
         } else if (evt.getKeyCode() == 117) {
             //F6 Key press - Book List
             tbbooklist2ActionPerformed(null);
-            
+
         } else if (evt.getKeyCode() == 118) {
             //F7 Key press - Special Rates
             tbspecial3ActionPerformed(null);
-            
+
         } else if (evt.getKeyCode() == 113) {
             tfdis.grabFocus();
+            tfdis.setText("10%");
             tfdis.selectAll();
         } else if (evt.getKeyCode() == 36) {
             tfcustName.setText(tfsearchItems.getText());
@@ -1592,9 +1606,14 @@ public class Invoice extends javax.swing.JFrame {
         if (evt.getKeyCode() == 127) {
             clearupper();
         }
-        if(evt.getKeyCode() == 119){
+        if (evt.getKeyCode() == 119) {
             tfprice.grabFocus();
             tfprice.selectAll();
+        }
+        if (evt.getKeyCode() == 113) {
+            tfdiscount.grabFocus();
+            tfdiscount.setText("10%");
+            //tfdiscount.selectAll();
         }
     }//GEN-LAST:event_tfqtyKeyReleased
 
@@ -1611,7 +1630,7 @@ public class Invoice extends javax.swing.JFrame {
             if (rs.next()) {
                 //tfprice.setText(rs.getString(1));
                 tfsearchItems.setText(rs.getString(3));
-                if ("Normal".equals(jLabel12.getText())) {
+                if ("Normal".equals(jLabel12.getText()) && tfdiscount.getText().isEmpty()) {
                     tfdiscount.setText(rs.getString(4));
                 }
 
@@ -1631,7 +1650,7 @@ public class Invoice extends javax.swing.JFrame {
                 v.add(tfqty.getText());
 
                 String newPrice = tfprice.getText();
-
+                System.out.println(tfdiscount.getText());
                 if (!tfdiscount.getText().isEmpty()) {
                     String lastChar = tfdiscount.getText().substring(tfdiscount.getText().length() - 1);
                     if (lastChar.equals("%")) {
@@ -1666,10 +1685,18 @@ public class Invoice extends javax.swing.JFrame {
             tfqty.setText("");
             tfqty.grabFocus();
         }
+        if (evt.getKeyCode() == 113) {
+            tfdiscount.grabFocus();
+            tfdiscount.setText("10%");
+            //tfdiscount.selectAll();
+        }
     }//GEN-LAST:event_tfpriceKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Vector v = new Vector();
+        v.add("10%");
+
+        es.JSuggestionField(null, v, tfdiscount, jPanel12, jPopupMenu2, tfqty, jButton1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1914,6 +1941,22 @@ public class Invoice extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbprevbill_INV3ActionPerformed
 
+    private void tfdiscountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdiscountKeyReleased
+        if (evt.getKeyCode() == 127) {
+            clearupper();
+            return;
+        }
+
+        Vector v = new Vector();
+        v.add("10%");
+
+        es.JSuggestionField(null, v, tfdiscount, jPanel12, jPopupMenu2, tfqty, jButton1);
+    }//GEN-LAST:event_tfdiscountKeyReleased
+
+    private void tfdiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdiscountActionPerformed
+        tfpriceActionPerformed(evt);
+    }//GEN-LAST:event_tfdiscountActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1982,6 +2025,7 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
