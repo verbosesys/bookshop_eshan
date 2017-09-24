@@ -317,7 +317,7 @@ public class Invoice extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 243, 224));
         jLabel4.setText("Date");
-        jLabel4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 204, 128)));
+        jLabel4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 152, 0)));
 
         lbdateinv.setBackground(new java.awt.Color(255, 243, 224));
         lbdateinv.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -348,7 +348,7 @@ public class Invoice extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 243, 224));
         jLabel8.setText("Time");
-        jLabel8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 204, 128)));
+        jLabel8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 152, 0)));
 
         lbtimeinv.setBackground(new java.awt.Color(255, 243, 224));
         lbtimeinv.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -379,7 +379,7 @@ public class Invoice extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 243, 224));
         jLabel6.setText("Invoice");
-        jLabel6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 204, 128)));
+        jLabel6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 152, 0)));
 
         lbinvno.setBackground(new java.awt.Color(255, 243, 224));
         lbinvno.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -410,7 +410,7 @@ public class Invoice extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 243, 224));
         jLabel10.setText("Cashier");
-        jLabel10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 204, 128)));
+        jLabel10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(255, 152, 0)));
 
         lbcashier.setBackground(new java.awt.Color(255, 243, 224));
         lbcashier.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -2178,7 +2178,7 @@ public class Invoice extends javax.swing.JFrame {
                 if (Integer.parseInt(ar.get(row).toString()) % 2 == 1) {
                     c.setBackground(new java.awt.Color(253, 253, 253));
                 } else {
-                    c.setBackground(new java.awt.Color(255, 243, 224));
+                    c.setBackground(new java.awt.Color(240,240,240));
                 }
                 return c;
             }
