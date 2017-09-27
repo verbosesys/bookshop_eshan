@@ -76,6 +76,7 @@
                                           <Component id="jLabel5" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
                                           <Component id="passwordFIELD" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="jLabel1" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
                               </Group>
@@ -110,7 +111,9 @@
                       </Group>
                       <Component id="jButton4" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="187" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="140" max="32767" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -281,6 +284,11 @@
                 </MatteColorBorder>
               </Border>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
         </Component>
       </SubComponents>

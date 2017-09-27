@@ -7,6 +7,7 @@ package UIClasses;
 
 import book_shop.CheckUser;
 import book_shop.DB;
+import book_shop.Display;
 import book_shop.Essencials;
 import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import java.awt.Color;
@@ -56,12 +57,20 @@ public class Invoice extends javax.swing.JFrame {
     DecimalFormat dfNor;
     SimpleDateFormat sdfdate;
     SimpleDateFormat sdftime;
+    Display display;
 
     public Invoice() {
         initComponents();
         es = new Essencials();
         es.setCenter(this);
         es.maximizeWin(this);
+        display = new Display();
+        boolean f = display.StartDisplay();
+        System.out.println(f);
+        
+        
+        display.PrintFirstLine("-------WELCOME------");
+        display.PrintSecondLine("   ESHAN BOOK SHOP  ");
 
         if ("User".equals(CheckUser.loggedPerson)) {
             jbprevbill_INV7.setEnabled(false);
@@ -1426,6 +1435,9 @@ public class Invoice extends javax.swing.JFrame {
                 tfsearchItems.setText(rs.getString(4));
                 tfdiscount.setText(rs.getString(3));
 
+                display.ClearDisplay();
+                display.PrintFirstLine(rs.getString(4));
+
             } else if (tfid.getText().isEmpty()) {
                 tfsearchItems.selectAll();
                 tfsearchItems.grabFocus();
@@ -1744,6 +1756,10 @@ public class Invoice extends javax.swing.JFrame {
                 ResultSet rs = DB.search("SELECT sell_price,sell_price2,discount,itemname FROM items WHERE iditems='" + tfid.getText() + "'");
                 if (rs.next()) {
                     tfsearchItems.setText(rs.getString(4));
+                    
+                    //dispplay
+                    
+                    display.PrintFirstLine(rs.getString(4));
 
                     if (jLabel12.getText().equals("Special Rates")) {
                         if (rs.getString(2).equals("")) {
