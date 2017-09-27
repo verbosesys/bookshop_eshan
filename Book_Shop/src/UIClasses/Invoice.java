@@ -50,7 +50,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class Invoice extends javax.swing.JFrame {
 
     Essencials es;
-    DefaultTableModel tbModleinv;
+    static DefaultTableModel tbModleinv;
     DefaultTableModel tbModleitem;
     DecimalFormat dftot;
     DecimalFormat dfNor;
@@ -167,6 +167,7 @@ public class Invoice extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         tftot = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -838,6 +839,13 @@ public class Invoice extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(40);
         }
 
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -846,13 +854,19 @@ public class Invoice extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(215, 215, 215))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addGap(17, 17, 17))
+                .addGap(58, 58, 58)
+                .addComponent(jButton4)
+                .addGap(73, 73, 73)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel15.setBackground(new java.awt.Color(250, 250, 250));
@@ -1957,6 +1971,10 @@ public class Invoice extends javax.swing.JFrame {
         tfpriceActionPerformed(evt);
     }//GEN-LAST:event_tfdiscountActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new PhotoCopy().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1977,6 +1995,7 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -2028,7 +2047,7 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton jbprevbill_INV;
     private javax.swing.JButton jbprevbill_INV1;
@@ -2050,12 +2069,12 @@ public class Invoice extends javax.swing.JFrame {
     private javax.swing.JTextField tfcustName;
     private javax.swing.JTextField tfdis;
     private javax.swing.JTextField tfdiscount;
-    private javax.swing.JTextField tfid;
-    private javax.swing.JTextField tfprice;
-    private javax.swing.JTextField tfqty;
+    public static javax.swing.JTextField tfid;
+    public static javax.swing.JTextField tfprice;
+    public static javax.swing.JTextField tfqty;
     private javax.swing.JTextField tfqty2;
     private javax.swing.JTextField tfqty3;
-    private javax.swing.JTextField tfsearchItems;
+    public static javax.swing.JTextField tfsearchItems;
     private javax.swing.JLabel tfsubtot;
     private javax.swing.JTextField tftot;
     // End of variables declaration//GEN-END:variables
@@ -2178,7 +2197,7 @@ public class Invoice extends javax.swing.JFrame {
                 if (Integer.parseInt(ar.get(row).toString()) % 2 == 1) {
                     c.setBackground(new java.awt.Color(253, 253, 253));
                 } else {
-                    c.setBackground(new java.awt.Color(240,240,240));
+                    c.setBackground(new java.awt.Color(240, 240, 240));
                 }
                 return c;
             }
